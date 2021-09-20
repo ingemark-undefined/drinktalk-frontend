@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import RNBootSplash from 'react-native-bootsplash';
 import Navigator from '@navigation/Navigator';
 
-RNBootSplash.hide({ fade: true });
+import colors from '@constants/colors';
 
 const App = () => {
   return (
@@ -17,6 +16,7 @@ const App = () => {
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
+    backgroundColor: colors.primary,
   },
 });
 
