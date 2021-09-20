@@ -2,12 +2,14 @@ package com.ingemark.drinktalk;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
+import com.zoontek.rnbootsplash.RNBootSplash;
 
 public class MainActivity extends ReactActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
+    RNBootSplash.init(R.drawable.bootsplash, MainActivity.this); 
   }
 
   /**
