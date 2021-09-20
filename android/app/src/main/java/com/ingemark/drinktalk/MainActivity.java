@@ -1,4 +1,4 @@
-package com.drinktalk;
+package com.ingemark.drinktalk;
 
 import com.facebook.react.ReactActivity;
 
