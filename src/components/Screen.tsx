@@ -2,8 +2,6 @@ import React from 'react';
 import { ViewStyle, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import color from '@constants/colors';
-
 export interface ScreenProps {
   style?: ViewStyle;
 }
