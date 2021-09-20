@@ -1,17 +1,16 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle, GestureResponderEvent } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent } from 'react-native';
 
 import colors from '@constants/colors';
 import { fontSize } from '@constants/typography';
 
 interface CircleButtonProps {
   size?: number;
-  style?: ViewStyle;
-  textStyle?: TextStyle;
+  title: string;
   onPress: (event: GestureResponderEvent) => void;
 }
 
-const CircleButton: React.FunctionComponent<CircleButtonProps> = ({ size = 80, style, textStyle, onPress }) => {
+const CircleButton: React.FunctionComponent<CircleButtonProps> = ({ size = 80, title, onPress }) => {
   const buttonStyle = {
     width: size,
     height: size,
@@ -19,8 +18,8 @@ const CircleButton: React.FunctionComponent<CircleButtonProps> = ({ size = 80, s
   };
 
   return (
-    <TouchableOpacity style={[styles.container, buttonStyle, style]} onPress={onPress}>
-      <Text style={[styles.text, textStyle]}>PRIJAVI SE</Text>
+    <TouchableOpacity style={[styles.container, buttonStyle]} onPress={onPress}>
+      <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -36,6 +35,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontFamily: 'BarutaBlack',
     fontSize: fontSize.large,
+    textTransform: 'uppercase',
   },
 });
 

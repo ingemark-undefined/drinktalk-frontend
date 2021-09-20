@@ -15,7 +15,7 @@ const Login: React.FunctionComponent<LoginProps> = () => {
         <TextField />
       </View>
 
-      <CircleButton size={150} onPress={() => {}} />
+      <CircleButton title="Prijavi se" size={150} onPress={() => {}} />
     </Screen>
   );
 };
