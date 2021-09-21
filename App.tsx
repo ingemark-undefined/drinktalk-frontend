@@ -1,17 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import RNBootSplash from 'react-native-bootsplash';
+import Navigator from '@navigation/Navigator';
 
-RNBootSplash.hide({ fade: true });
+import colors from '@constants/colors';
 
 const App = () => {
   return (
     <GestureHandlerRootView style={styles.flex}>
-      <NavigationContainer>
-        <View />
-      </NavigationContainer>
+      <Navigator />
     </GestureHandlerRootView>
   );
 };
@@ -19,6 +16,7 @@ const App = () => {
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
+    backgroundColor: colors.primary,
   },
 });
 
