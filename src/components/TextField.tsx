@@ -1,14 +1,14 @@
 import React from 'react';
-import { TextInput, StyleSheet, ViewStyle } from 'react-native';
+import { TextInput, StyleSheet, ViewStyle, TextInputProps } from 'react-native';
 
 import colors from '@constants/colors';
 
-interface TextFieldProps {
+interface TextFieldProps extends TextInputProps {
   style?: ViewStyle;
 }
 
-const TextField: React.FunctionComponent<TextFieldProps> = ({ style }) => {
-  return <TextInput style={[styles.textInput, style]} placeholder="Daj nadimak ili ime" />;
+const TextField: React.FunctionComponent<TextFieldProps> = ({ style, ...props }) => {
+  return <TextInput style={[styles.textInput, style]} placeholder="Daj nadimak ili ime" {...props} />;
 };
 
 const styles = StyleSheet.create({

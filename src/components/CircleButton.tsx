@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent, ViewStyle, TextStyle } from 'react-native';
 
 import colors from '@constants/colors';
 import { fontSize } from '@constants/typography';
@@ -8,9 +8,11 @@ interface CircleButtonProps {
   size?: number;
   title: string;
   onPress: (event: GestureResponderEvent) => void;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
 }
 
-const CircleButton: React.FunctionComponent<CircleButtonProps> = ({ size = 80, title, onPress }) => {
+const CircleButton: React.FunctionComponent<CircleButtonProps> = ({ size = 80, title, onPress, style, textStyle }) => {
   const buttonStyle = {
     width: size,
     height: size,
@@ -18,8 +20,8 @@ const CircleButton: React.FunctionComponent<CircleButtonProps> = ({ size = 80, t
   };
 
   return (
-    <TouchableOpacity style={[styles.container, buttonStyle]} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
+    <TouchableOpacity style={[styles.container, buttonStyle, style]} onPress={onPress}>
+      <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
