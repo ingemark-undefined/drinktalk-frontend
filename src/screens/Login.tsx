@@ -6,11 +6,15 @@ import { CircleButton, Icon, TextField } from '@components/index';
 
 import { LogoIcon } from '@assets/icons/index';
 import screen from '@navigation/screens';
+import { NavigatorParamList } from '@navigation/Navigator';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type LoginScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.LOGIN>;
 
 interface LoginProps {}
 
 const Login: React.FunctionComponent<LoginProps> = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<LoginScreenNavigationProp>();
   const [name, setName] = useState<string>('');
 
   return (

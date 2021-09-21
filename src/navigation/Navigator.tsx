@@ -14,12 +14,6 @@ export type NavigatorParamList = {
   Home: { name: string };
 };
 
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends NavigatorParamList {}
-  }
-}
-
 export interface NavigatorProps {}
 
 const Stack = createStackNavigator<NavigatorParamList>();
