@@ -27,19 +27,19 @@ const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
       </TouchableOpacity>
       <Icon width={140} height={140} icon={LogoIcon} style={styles.logoIcon} />
       <View style={styles.textContainer}>
-        <Text style={[styles.text, styles.white]}>Hellou</Text>
+        <Text style={[styles.text, styles.white]}>HELLOU</Text>
         <Text style={styles.text}>{name}</Text>
       </View>
 
       <CircleButton
         size={150}
-        title="Kreiraj igru"
+        title="KREIRAJ IGRU"
         onPress={() => {}}
         style={styles.createButton}
         textStyle={{ fontSize: fontSize.mediumLarge }}
       />
       <TouchableOpacity style={styles.joinButton}>
-        <Text style={styles.joinText}>Prijavi se u postojeću igru</Text>
+        <Text style={styles.joinText}>PRIJAVI SE U POSTOJEĆU IGRU</Text>
       </TouchableOpacity>
     </Screen>
   );
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
   joinText: {
     fontSize: fontSize.medium,
     fontFamily: 'BarutaBlack',
-    textTransform: 'uppercase',
   },
 });
 

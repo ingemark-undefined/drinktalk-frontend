@@ -18,7 +18,7 @@ const Login: React.FunctionComponent<LoginProps> = () => {
       <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={-180}>
         <Icon width={169} height={180} icon={LogoIcon} />
         <View style={styles.textField}>
-          <TextField value={name} onChangeText={(value) => setName(value)} />
+          <TextField placeholder="Daj nadimak ili ime" value={name} onChangeText={(value) => setName(value)} />
         </View>
         <CircleButton title="Prijavi se" size={150} onPress={() => navigation.navigate(screen.HOME, { name })} />
       </KeyboardAvoidingView>
