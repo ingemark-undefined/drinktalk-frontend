@@ -38,28 +38,30 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
         <Text style={[styles.text, styles.white]}>Hellou</Text>
       </View>
 
-      <Text>Vrijeme igre</Text>
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        style={{ width: '60%', backgroundColor: colors.black, borderRadius: 30, alignSelf: 'center' }}
-        dropDownContainerStyle={{
-          alignSelf: 'center',
-          width: '60%',
-          backgroundColor: colors.black,
-          borderBottomLeftRadius: 30,
-          borderBottomRightRadius: 30,
-          paddingBottom: 10,
-        }}
-        textStyle={{ fontFamily: 'BarutaBlack', color: colors.white, backgroundColor: colors.black }}
-        ArrowUpIconComponent={() => <Icon icon={ChevronUpIcon} />}
-        ArrowDownIconComponent={() => <Icon icon={ChevronDownIcon} />}
-        props={{ activeOpacity: 1 }}
-      />
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Vrijeme igre</Text>
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={items}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setItems}
+          style={{ width: '50%', backgroundColor: colors.black, borderRadius: 30, alignSelf: 'center' }}
+          dropDownContainerStyle={{
+            alignSelf: 'center',
+            width: '50%',
+            backgroundColor: colors.black,
+            borderBottomLeftRadius: 30,
+            borderBottomRightRadius: 30,
+            paddingBottom: 10,
+          }}
+          textStyle={{ fontFamily: 'BarutaBlack', color: colors.white, backgroundColor: colors.black }}
+          ArrowUpIconComponent={() => <Icon icon={ChevronUpIcon} />}
+          ArrowDownIconComponent={() => <Icon icon={ChevronDownIcon} />}
+          props={{ activeOpacity: 1 }}
+        />
+      </View>
 
       <CircleButton
         size={150}
