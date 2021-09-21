@@ -1,22 +1,102 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
 
-import { CircleButton, Icon, TextField } from '@components/index';
+import { CircleButton, Icon, Screen } from '@components/index';
 
-import { LogoIcon } from '@assets/icons';
+import { LogoIcon, ChevronLeftIcon } from '@assets/icons';
+import colors from '@constants/colors';
+import { fontSize } from '@constants/typography';
+import { NavigatorParamList } from '@navigation/Navigator';
+import screen from '@navigation/screens';
 
-interface HomeProps {}
+type HomeScreenRouteProp = RouteProp<NavigatorParamList, screen.HOME>;
 
-const Home: React.FunctionComponent<HomeProps> = () => {
+interface HomeProps {
+  route: HomeScreenRouteProp;
+}
+
+const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
+  const navigation = useNavigation();
+  const { name } = route.params;
+
   return (
-    <SafeAreaView>
-      <Text></Text>
-      <Icon width={100} height={100} icon={LogoIcon} />
-      <TextField />
-      <CircleButton size={150} onPress={() => {}} />
-    </SafeAreaView>
+    <Screen style={styles.container}>
+      <TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
+        <Icon width={20} height={20} icon={ChevronLeftIcon} />
+      </TouchableOpacity>
+      <Icon width={140} height={140} icon={LogoIcon} style={styles.logoIcon} />
+      <View style={styles.textContainer}>
+        <Text style={[styles.text, styles.white]}>HELLOU</Text>
+        <Text style={styles.text}>{name}</Text>
+      </View>
+
+      <CircleButton
+        size={150}
+        title="KREIRAJ IGRU"
+        onPress={() => {}}
+        style={styles.createButton}
+        textStyle={{ fontSize: fontSize.mediumLarge }}
+      />
+      <TouchableOpacity style={styles.joinButton}>
+        <Text style={styles.joinText}>PRIJAVI SE U POSTOJEĆU IGRU</Text>
+      </TouchableOpacity>
+    </Screen>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  backButton: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    padding: 14,
+    borderRadius: 24,
+    position: 'absolute',
+    top: 50,
+    left: 38,
+  },
+  logoIcon: {
+    marginTop: 70,
+  },
+  textContainer: {
+    marginTop: 62,
+    marginBottom: 56,
+  },
+  text: {
+    fontFamily: 'BarutaBlack',
+    fontSize: fontSize.extraLarge,
+    textAlign: 'center',
+  },
+  white: {
+    color: colors.white,
+  },
+  createButton: {
+    marginBottom: 150,
+  },
+  joinButton: {
+    position: 'absolute',
+    backgroundColor: colors.white,
+    bottom: 0,
+    width: '100%',
+    borderTopLeftRadius: 55,
+    borderTopRightRadius: 55,
+    paddingHorizontal: 80,
+    paddingTop: 48,
+    paddingBottom: 30,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  joinText: {
+    fontSize: fontSize.medium,
+    fontFamily: 'BarutaBlack',
+  },
+});
 
 export default Home;
