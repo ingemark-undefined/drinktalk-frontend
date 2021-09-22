@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
   },
   qrCodeContainer: {
     backgroundColor: colors.white,
-    width: 140,
-    height: 140,
+    width: 170,
+    height: 170,
     borderRadius: 24,
     marginBottom: 40,
     marginTop: 130,

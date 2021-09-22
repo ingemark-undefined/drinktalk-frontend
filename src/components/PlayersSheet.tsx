@@ -8,18 +8,19 @@ import CloseButton from './CloseButton';
 
 import colors from '@constants/colors';
 
-const dummyData = ['Krešo Orešković', 'Predrag Kežić', 'Mislav Čotić', 'Predrag Kežić', 'Mislav Čotić'];
+const dummyData = ['Krešo Orešković', 'Predrag Kežić', 'Mislav Čotić', 'Predrag Kežić2', 'Mislav Čotić2'];
 
 const App = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [expanded, setExpanded] = useState<boolean>(false);
 
-  const snapPoints = useMemo(() => ['33%', '100%'], []);
+  const snapPoints = useMemo(() => ['43%', '100%'], []);
 
   return (
     <BottomSheet
       ref={bottomSheetRef}
-      index={1}
+      index={0}
+      backgroundStyle={styles.background}
       snapPoints={snapPoints}
       onChange={(index) => (index ? setExpanded(true) : setExpanded(false))}
       handleComponent={!expanded ? () => <SheetHandle onPress={() => bottomSheetRef.current?.expand()} /> : null}>
@@ -48,6 +49,7 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 25,
     width: '100%',
   },
   contentContainer: {
@@ -70,6 +72,9 @@ const styles = StyleSheet.create({
   },
   separator: {
     marginVertical: 18,
+  },
+  background: {
+    borderRadius: 55,
   },
 });
 
