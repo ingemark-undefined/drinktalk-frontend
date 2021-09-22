@@ -9,7 +9,7 @@ import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 
-type LoserScreenRouteProp = RouteProp<NavigatorParamList, screen.HOME>;
+type LoserScreenRouteProp = RouteProp<NavigatorParamList, screen.LOSER>;
 
 interface LoserProps {
   route: LoserScreenRouteProp;
