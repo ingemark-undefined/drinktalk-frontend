@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: fontSize.large,
     color: colors.black,
-    marginVertical: 14,
+    marginVertical: 20,
   },
   title: {
     fontSize: fontSize.extraLarge,
