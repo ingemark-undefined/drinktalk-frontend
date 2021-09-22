@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState, Fragment } from 'react';
+import React, { useMemo, useRef, useState, Fragment } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import DashedLine from 'react-native-dashed-line';

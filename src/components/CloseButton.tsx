@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps, StyleSheet, ViewStyle } from 'react-native';
+import { MotiView, AnimatePresence } from 'moti';
 
 import Icon from './Icon';
 
@@ -12,9 +13,25 @@ interface CloseButtonProps extends TouchableOpacityProps {
 
 const CloseButton: React.FunctionComponent<CloseButtonProps> = ({ style, ...props }) => {
   return (
-    <TouchableOpacity style={[styles.button, style]} {...props}>
-      <Icon width={20} height={20} icon={CloseIcon} />
-    </TouchableOpacity>
+    <AnimatePresence>
+      <MotiView
+        from={{
+          opacity: 0,
+          scale: 0.9,
+        }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+        }}
+        exit={{
+          opacity: 0,
+          scale: 0.9,
+        }}>
+        <TouchableOpacity style={[styles.button, style]} {...props}>
+          <Icon width={20} height={20} icon={CloseIcon} />
+        </TouchableOpacity>
+      </MotiView>
+    </AnimatePresence>
   );
 };
 

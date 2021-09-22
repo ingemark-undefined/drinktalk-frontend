@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps, StyleSheet } from 'react-native';
+import { MotiView, AnimatePresence } from 'moti';
 
 import Icon from './Icon';
 
@@ -10,9 +11,25 @@ interface SheetHandleProps extends TouchableOpacityProps {}
 
 const SheetHandle: React.FunctionComponent<SheetHandleProps> = ({ ...props }) => {
   return (
-    <TouchableOpacity style={styles.handle} {...props}>
-      <Icon icon={ChevronUpIcon} width={20} height={20} />
-    </TouchableOpacity>
+    <AnimatePresence>
+      <MotiView
+        from={{
+          opacity: 0,
+          scale: 0.9,
+        }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+        }}
+        exit={{
+          opacity: 0,
+          scale: 0.9,
+        }}>
+        <TouchableOpacity style={styles.handle} {...props}>
+          <Icon icon={ChevronUpIcon} width={20} height={20} />
+        </TouchableOpacity>
+      </MotiView>
+    </AnimatePresence>
   );
 };
 
