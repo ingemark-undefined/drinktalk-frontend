@@ -1,17 +1,19 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text, TouchableOpacityProps } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, TouchableOpacityProps, ViewStyle, TextStyle } from 'react-native';
 
 import colors from '@constants/colors';
 import { fontSize } from '@constants/typography';
 
 interface BottomButtonProps extends TouchableOpacityProps {
   title: string;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
 }
 
-const BottomButton: React.FunctionComponent<BottomButtonProps> = ({ title, ...props }) => {
+const BottomButton: React.FunctionComponent<BottomButtonProps> = ({ title, style, textStyle, ...props }) => {
   return (
-    <TouchableOpacity style={styles.button} {...props}>
-      <Text style={styles.text}>{title}</Text>
+    <TouchableOpacity style={[styles.button, style]} {...props}>
+      <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
