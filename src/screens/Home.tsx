@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { RouteProp, useNavigation } from '@react-navigation/native';
+import { accelerometer, setUpdateIntervalForType, SensorTypes } from 'react-native-sensors';
+import BackgroundService from 'react-native-background-actions';
 
 import { BottomButton, CircleButton, Icon, Screen } from '@components/index';
 
@@ -19,6 +21,34 @@ interface HomeProps {
   route: HomeScreenRouteProp;
 }
 
+const veryIntensiveTask = async (taskDataArguments) => {
+  // Example of an infinite loop task
+  await new Promise(async (resolve) => {
+    setUpdateIntervalForType(SensorTypes.accelerometer, 100);
+
+    socket.on('gameId', (gameId) => {
+      console.log(gameId);
+    });
+
+    // const subscription = accelerometer.subscribe(({ x, y, z, timestamp }) => console.log({ x, y, z, timestamp }));
+  });
+};
+
+const options = {
+  taskName: 'Example',
+  taskTitle: 'ExampleTask title',
+  taskDesc: 'ExampleTask description',
+  taskIcon: {
+    name: 'ic_launcher',
+    type: 'mipmap',
+  },
+  color: '#ff00ff',
+  linkingURI: 'yourSchemeHere://chat/jane', // See Deep Linking for more info
+  parameters: {
+    delay: 1000,
+  },
+};
+
 const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const { name } = route.params;
@@ -27,9 +57,19 @@ const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
     socket.emit('game:new', 90);
     socket.on('gameId', (gameId) => {
       console.log(gameId);
+      navigation.navigate(screen.NEW_GAME);
     });
-    // navigation.navigate(screen.NEW_GAME);
   };
+  useEffect(() => {
+    const zapocni = async () => {
+      try {
+        await BackgroundService.start(veryIntensiveTask, options);
+      } catch (err) {
+        console.log('error', err);
+      }
+    };
+    zapocni();
+  }, []);
 
   return (
     <Screen style={styles.container}>
