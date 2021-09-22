@@ -10,6 +10,7 @@ import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
+import socket from '../utils/ws';
 
 type HomeScreenRouteProp = RouteProp<NavigatorParamList, screen.HOME>;
 type HomeScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.HOME>;
@@ -21,6 +22,14 @@ interface HomeProps {
 const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const { name } = route.params;
+
+  const handleNewGame = () => {
+    socket.emit('game:new', 90);
+    socket.on('gameId', (gameId) => {
+      console.log(gameId);
+    });
+    // navigation.navigate(screen.NEW_GAME);
+  };
 
   return (
     <Screen style={styles.container}>
@@ -36,7 +45,7 @@ const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
       <CircleButton
         size={150}
         title="Kreiraj igru"
-        onPress={() => navigation.navigate(screen.NEW_GAME)}
+        onPress={handleNewGame}
         style={styles.createButton}
         textStyle={{ fontSize: fontSize.mediumLarge }}
       />
