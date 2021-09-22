@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import QRCode from 'react-native-qrcode-svg';
 
 import { BottomButton, Icon, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
 
@@ -25,7 +26,9 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
       <TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
         <Icon width={20} height={20} icon={ChevronLeftIcon} />
       </TouchableOpacity>
-      <View style={styles.qrCodeContainer} />
+      <View style={styles.qrCodeContainer}>
+        <QRCode value="test" size={120} />
+      </View>
 
       <View style={styles.timeContainer}>
         <Text style={styles.timeText}>Vrijeme igre</Text>
@@ -64,6 +67,8 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     marginBottom: 40,
     marginTop: 130,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   timeContainer: {
     alignItems: 'center',
