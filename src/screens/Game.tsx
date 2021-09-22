@@ -1,9 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Screen } from '@components/index';
-
-import Instructions from '@components/Instructions';
+import { Screen, Instructions } from '@components/index';
 
 interface GameProps {}
 
