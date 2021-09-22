@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 
-import { CircleButton, Icon, Screen } from '@components/index';
+import { CircleButton, Icon, Screen, BottomButton } from '@components/index';
 
 import { LogoIcon, ChevronLeftIcon } from '@assets/icons';
 import colors from '@constants/colors';
@@ -40,9 +40,7 @@ const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
         style={styles.createButton}
         textStyle={{ fontSize: fontSize.mediumLarge }}
       />
-      <TouchableOpacity style={styles.joinButton}>
-        <Text style={styles.joinText}>Prijavi se u postojeću igru</Text>
-      </TouchableOpacity>
+      <BottomButton title="Prijavi se u postojeću igru" onPress={() => {}} />
     </Screen>
   );
 };
@@ -80,25 +78,6 @@ const styles = StyleSheet.create({
   },
   createButton: {
     marginBottom: 150,
-  },
-  joinButton: {
-    position: 'absolute',
-    backgroundColor: colors.white,
-    bottom: 0,
-    width: '100%',
-    borderTopLeftRadius: 55,
-    borderTopRightRadius: 55,
-    paddingHorizontal: 80,
-    paddingTop: 48,
-    paddingBottom: 30,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  joinText: {
-    fontSize: fontSize.medium,
-    fontFamily: 'BarutaBlack',
-    textTransform: 'uppercase',
   },
 });
 
