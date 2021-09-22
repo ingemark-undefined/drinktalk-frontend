@@ -18,6 +18,7 @@
     "moti": "^0.14.2",
     "react": "17.0.2",
     "react-native": "0.65.1",
+    "react-native-background-actions": "^2.6.2",
     "react-native-bootsplash": "^3.2.5",
     "react-native-countdown-circle-timer": "^2.5.4",
     "react-native-dashed-line": "^1.1.0",
@@ -27,6 +28,7 @@
     "react-native-reanimated": "^2.2.2",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.7.2",
+    "react-native-sensors": "^7.3.3",
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
