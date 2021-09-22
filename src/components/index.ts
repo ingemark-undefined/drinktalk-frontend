@@ -4,3 +4,4 @@ export { default as CircleButton } from './CircleButton';
 export { default as Screen } from './Screen';
 export { default as BottomButton } from './BottomButton';
 export { default as PlayersSheet } from './PlayersSheet';
+export { default as CloseButton } from './CloseButton';
