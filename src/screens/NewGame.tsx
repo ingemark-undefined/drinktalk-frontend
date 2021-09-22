@@ -3,9 +3,9 @@ import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-import { CircleButton, Icon, Screen } from '@components/index';
+import { BottomButton, Icon, PlayersSheet, Screen } from '@components/index';
 
-import { LogoIcon, ChevronLeftIcon, ChevronDownIcon, ChevronUpIcon } from '@assets/icons';
+import { ChevronLeftIcon, ChevronDownIcon, ChevronUpIcon } from '@assets/icons';
 import colors from '@constants/colors';
 import { fontSize } from '@constants/typography';
 import { NavigatorParamList } from '@navigation/Navigator';
@@ -33,42 +33,34 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
       <TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
         <Icon width={20} height={20} icon={ChevronLeftIcon} />
       </TouchableOpacity>
-      <Icon width={140} height={140} icon={LogoIcon} style={styles.logoIcon} />
-      <View style={styles.textContainer}>
-        <Text style={[styles.text, styles.white]}>Hellou</Text>
+      <View style={styles.qrCodeContainer} />
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Text style={{ fontFamily: 'BarutaBlack', fontSize: 18, marginRight: 28 }}>Vrijeme igre</Text>
+        <View style={styles.dropdownContView}>
+          <DropDownPicker
+            open={open}
+            value={value}
+            placeholder="Odaberi"
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            style={styles.dropdown}
+            dropDownContainerStyle={styles.dropdownContainer}
+            textStyle={styles.dropdownText}
+            ArrowUpIconComponent={() => <Icon icon={ChevronUpIcon} />}
+            ArrowDownIconComponent={() => <Icon icon={ChevronDownIcon} />}
+            props={{ activeOpacity: 1 }}
+          />
+        </View>
       </View>
 
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Vrijeme igre</Text>
-        <DropDownPicker
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          style={{ width: '50%', backgroundColor: colors.black, borderRadius: 30, alignSelf: 'center' }}
-          dropDownContainerStyle={{
-            alignSelf: 'center',
-            width: '50%',
-            backgroundColor: colors.black,
-            borderBottomLeftRadius: 30,
-            borderBottomRightRadius: 30,
-            paddingBottom: 10,
-          }}
-          textStyle={{ fontFamily: 'BarutaBlack', color: colors.white, backgroundColor: colors.black }}
-          ArrowUpIconComponent={() => <Icon icon={ChevronUpIcon} />}
-          ArrowDownIconComponent={() => <Icon icon={ChevronDownIcon} />}
-          props={{ activeOpacity: 1 }}
-        />
-      </View>
-
-      <CircleButton
-        size={150}
-        title="Kreiraj igru"
+      <PlayersSheet />
+      <BottomButton
+        title="Kreni s igrom"
         onPress={() => {}}
-        style={styles.createButton}
-        textStyle={{ fontSize: fontSize.mediumLarge }}
+        style={{ backgroundColor: colors.black }}
+        textStyle={{ color: colors.white }}
       />
     </Screen>
   );
@@ -77,7 +69,6 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
   },
   backButton: {
     flexDirection: 'row',
@@ -90,42 +81,37 @@ const styles = StyleSheet.create({
     top: 50,
     left: 38,
   },
-  logoIcon: {
-    marginTop: 70,
-  },
-  textContainer: {
-    marginTop: 62,
-    marginBottom: 56,
-  },
-  text: {
-    fontFamily: 'BarutaBlack',
-    fontSize: fontSize.extraLarge,
-    textAlign: 'center',
-  },
-  white: {
-    color: colors.white,
-  },
-  createButton: {
-    marginBottom: 150,
-  },
-  joinButton: {
-    position: 'absolute',
+  qrCodeContainer: {
     backgroundColor: colors.white,
-    bottom: 0,
-    width: '100%',
-    borderTopLeftRadius: 55,
-    borderTopRightRadius: 55,
-    paddingHorizontal: 80,
-    paddingTop: 48,
-    paddingBottom: 30,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: 140,
+    height: 140,
+    borderRadius: 24,
+    marginBottom: 40,
+    marginTop: 130,
   },
-  joinText: {
-    fontSize: fontSize.medium,
+  time: {
     fontFamily: 'BarutaBlack',
-    textTransform: 'uppercase',
+    fontSize: 18,
+    marginRight: 28,
+  },
+  dropdownContView: {
+    width: '35%',
+  },
+  dropdown: {
+    backgroundColor: colors.black,
+    borderRadius: 30,
+    alignSelf: 'center',
+  },
+  dropdownContainer: {
+    alignSelf: 'center',
+    backgroundColor: colors.black,
+    borderRadius: 30,
+    paddingBottom: 10,
+  },
+  dropdownText: {
+    fontFamily: 'BarutaBlack',
+    color: colors.white,
+    backgroundColor: colors.black,
   },
 });
 
