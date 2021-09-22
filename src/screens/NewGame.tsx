@@ -7,7 +7,6 @@ import { BottomButton, Icon, PlayersSheet, Screen } from '@components/index';
 
 import { ChevronLeftIcon, ChevronDownIcon, ChevronUpIcon } from '@assets/icons';
 import colors from '@constants/colors';
-import { fontSize } from '@constants/typography';
 import { NavigatorParamList } from '@navigation/Navigator';
 import screen from '@navigation/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -34,8 +33,8 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
         <Icon width={20} height={20} icon={ChevronLeftIcon} />
       </TouchableOpacity>
       <View style={styles.qrCodeContainer} />
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Text style={{ fontFamily: 'BarutaBlack', fontSize: 18, marginRight: 28 }}>Vrijeme igre</Text>
+      <View style={styles.timeContainer}>
+        <Text style={styles.timeText}>Vrijeme igre</Text>
         <View style={styles.dropdownContView}>
           <DropDownPicker
             open={open}
@@ -51,7 +50,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
             ArrowUpIconComponent={() => <Icon icon={ChevronUpIcon} />}
             ArrowDownIconComponent={() => <Icon icon={ChevronDownIcon} />}
             props={{ activeOpacity: 1 }}
-            zIndex={0}
+            zIndex={open ? 1 : 0}
           />
         </View>
       </View>
@@ -89,6 +88,15 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     marginBottom: 40,
     marginTop: 130,
+  },
+  timeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  timeText: {
+    fontFamily: 'BarutaBlack',
+    fontSize: 18,
+    marginRight: 28,
   },
   time: {
     fontFamily: 'BarutaBlack',
