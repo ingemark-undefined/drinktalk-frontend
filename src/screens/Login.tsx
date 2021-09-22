@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableWithoutFeedback, KeyboardAvoidingView, View, StyleSheet, Keyboard } from 'react-native';
+import { TouchableWithoutFeedback, KeyboardAvoidingView, View, StyleSheet, Keyboard, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { CircleButton, Icon, TextField } from '@components/index';
@@ -17,6 +17,15 @@ const Login: React.FunctionComponent<LoginProps> = () => {
   const navigation = useNavigation<LoginScreenNavigationProp>();
   const [name, setName] = useState<string>('');
 
+  const handleSubmit = () => {
+    if (!name) {
+      Alert.alert('Molimo popuni svoj nadimak/ime!');
+      return;
+    }
+
+    navigation.navigate(screen.HOME, { name });
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={-180}>
@@ -24,7 +33,7 @@ const Login: React.FunctionComponent<LoginProps> = () => {
         <View style={styles.textField}>
           <TextField placeholder="Daj nadimak ili ime" value={name} onChangeText={(value) => setName(value)} />
         </View>
-        <CircleButton title="Prijavi se" size={150} onPress={() => navigation.navigate(screen.HOME, { name })} />
+        <CircleButton title="Prijavi se" size={150} onPress={handleSubmit} />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );

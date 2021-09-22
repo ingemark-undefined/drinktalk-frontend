@@ -1,23 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, TouchableOpacityProps, ViewStyle, TextStyle } from 'react-native';
 
-import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
+import { fontSize } from '@constants/typography';
 
 interface BottomButtonProps extends TouchableOpacityProps {
   title: string;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
 }
 
-const BottomButton: React.FunctionComponent<BottomButtonProps> = ({ title, ...props }) => {
+const BottomButton: React.FunctionComponent<BottomButtonProps> = ({ title, style, textStyle, ...props }) => {
   return (
-    <TouchableOpacity style={styles.container} {...props}>
-      <Text style={styles.text}>{title}</Text>
+    <TouchableOpacity style={[styles.button, style]} {...props}>
+      <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  button: {
     position: 'absolute',
     backgroundColor: colors.white,
     bottom: 0,
@@ -25,8 +27,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 55,
     borderTopRightRadius: 55,
     paddingHorizontal: 80,
-    paddingTop: 48,
-    paddingBottom: 30,
+    paddingVertical: 30,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

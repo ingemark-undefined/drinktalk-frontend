@@ -5,6 +5,7 @@ enum Screen {
   COUNTDOWN = 'Countdown',
   LOSER = 'Loser',
   SUCCESS = 'Success',
+  NEW_GAME = 'NewGame',
 }
 
 export default Screen;

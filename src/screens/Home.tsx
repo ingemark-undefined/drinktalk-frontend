@@ -9,15 +9,17 @@ import { NavigatorParamList } from '@navigation/Navigator';
 import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type HomeScreenRouteProp = RouteProp<NavigatorParamList, screen.HOME>;
+type HomeScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.HOME>;
 
 interface HomeProps {
   route: HomeScreenRouteProp;
 }
 
 const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const { name } = route.params;
 
   return (
@@ -34,12 +36,11 @@ const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
       <CircleButton
         size={150}
         title="Kreiraj igru"
-        onPress={() => {}}
+        onPress={() => navigation.navigate(screen.NEW_GAME)}
         style={styles.createButton}
         textStyle={{ fontSize: fontSize.mediumLarge }}
       />
-
-      <BottomButton title="Prijavi se u postojeću igru" />
+      <BottomButton title="Prijavi se u postojeću igru" onPress={() => {}} />
     </Screen>
   );
 };

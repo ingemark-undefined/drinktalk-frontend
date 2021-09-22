@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
 
-import { Login, Home, Game, Countdown, Loser, Success } from '@screens/index';
+import { Login, Home, Game, Countdown, Loser, Success, NewGame } from '@screens/index';
 
 import screen from '@navigation/screens';
 import colors from '@constants/colors';
@@ -16,6 +16,7 @@ export type NavigatorParamList = {
   Countdown: undefined;
   Loser: undefined;
   Success: undefined;
+  NewGame: undefined;
 };
 
 export interface NavigatorProps {}
@@ -32,6 +33,7 @@ const Navigator: React.FunctionComponent<NavigatorProps> = () => {
         <Stack.Screen name={screen.GAME} component={Game} />
         <Stack.Screen name={screen.LOSER} component={Loser} />
         <Stack.Screen name={screen.SUCCESS} component={Success} />
+        <Stack.Screen name={screen.NEW_GAME} component={NewGame} />
       </Stack.Navigator>
     </NavigationContainer>
   );
