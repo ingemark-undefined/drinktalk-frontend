@@ -2,12 +2,12 @@ import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 
-import { CircleButton, Icon, Screen } from '@components/index';
+import { BottomButton, CircleButton, Icon, Screen } from '@components/index';
 
 import { LogoIcon, ChevronLeftIcon } from '@assets/icons';
-import colors from '@constants/colors';
-import { fontSize } from '@constants/typography';
 import { NavigatorParamList } from '@navigation/Navigator';
+import { fontSize } from '@constants/typography';
+import colors from '@constants/colors';
 import screen from '@navigation/screens';
 
 type HomeScreenRouteProp = RouteProp<NavigatorParamList, screen.HOME>;
@@ -38,9 +38,8 @@ const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
         style={styles.createButton}
         textStyle={{ fontSize: fontSize.mediumLarge }}
       />
-      <TouchableOpacity style={styles.joinButton}>
-        <Text style={styles.joinText}>Prijavi se u postojeću igru</Text>
-      </TouchableOpacity>
+
+      <BottomButton title="Prijavi se u postojeću igru" />
     </Screen>
   );
 };
@@ -78,25 +77,6 @@ const styles = StyleSheet.create({
   },
   createButton: {
     marginBottom: 150,
-  },
-  joinButton: {
-    position: 'absolute',
-    backgroundColor: colors.white,
-    bottom: 0,
-    width: '100%',
-    borderTopLeftRadius: 55,
-    borderTopRightRadius: 55,
-    paddingHorizontal: 80,
-    paddingTop: 48,
-    paddingBottom: 30,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  joinText: {
-    fontSize: fontSize.medium,
-    fontFamily: 'BarutaBlack',
-    textTransform: 'uppercase',
   },
 });
 
