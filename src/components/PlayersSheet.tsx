@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, Fragment } from 'react';
+import React, { useCallback, useMemo, useRef, useState, Fragment } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import DashedLine from 'react-native-dashed-line';
@@ -12,22 +12,19 @@ const dummyData = ['Krešo Orešković', 'Predrag Kežić', 'Mislav Čotić', 'P
 
 const App = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const [expanded, setExpanded] = useState<boolean>(false);
 
   const snapPoints = useMemo(() => ['33%', '100%'], []);
-
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
 
   return (
     <BottomSheet
       ref={bottomSheetRef}
       index={1}
       snapPoints={snapPoints}
-      onChange={handleSheetChanges}
-      handleComponent={() => <SheetHandle onPress={() => bottomSheetRef.current?.expand()} />}>
+      onChange={(index) => (index ? setExpanded(true) : setExpanded(false))}
+      handleComponent={!expanded ? () => <SheetHandle onPress={() => bottomSheetRef.current?.expand()} /> : null}>
       <View style={styles.container}>
-        <CloseButton style={styles.closeButton} onPress={() => bottomSheetRef.current?.collapse()} />
+        {expanded && <CloseButton style={styles.closeButton} onPress={() => bottomSheetRef.current?.collapse()} />}
         <View style={styles.contentContainer}>
           <Text style={styles.title}>Prijavljena ekipa</Text>
           {dummyData.map((dummy, index) => (
