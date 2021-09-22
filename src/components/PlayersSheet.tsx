@@ -1,10 +1,12 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import BottomSheet from '@gorhom/bottom-sheet';
-import DashedLine from 'react-native-dashed-line';
 
 import SheetHandle from './SheetHandle';
 import CloseButton from './CloseButton';
+import Player from './Player';
+import Separator from './Separator';
 
 import colors from '@constants/colors';
 
@@ -14,7 +16,7 @@ const App = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [expanded, setExpanded] = useState<boolean>(false);
 
-  const snapPoints = useMemo(() => ['43%', '100%'], []);
+  const snapPoints = useMemo(() => ['42%', '100%'], []);
 
   return (
     <BottomSheet
@@ -28,18 +30,7 @@ const App = () => {
         {expanded && <CloseButton style={styles.closeButton} onPress={() => bottomSheetRef.current?.collapse()} />}
         <View style={styles.contentContainer}>
           <Text style={styles.title}>Prijavljena ekipa</Text>
-          {dummyData.map((name, index) => (
-            <View key={name}>
-              <Text style={styles.player}>
-                {index + 1}. {name}
-              </Text>
-              {index !== dummyData.length - 1 && (
-                <View style={styles.separator}>
-                  <DashedLine dashLength={5} dashThickness={0.6} dashGap={5} dashColor={colors.gray} />
-                </View>
-              )}
-            </View>
-          ))}
+          <FlatList data={dummyData} renderItem={Player} keyExtractor={(item) => item} ItemSeparatorComponent={Separator} />
         </View>
       </View>
     </BottomSheet>
