@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState, Fragment } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import DashedLine from 'react-native-dashed-line';
@@ -28,17 +28,17 @@ const App = () => {
         {expanded && <CloseButton style={styles.closeButton} onPress={() => bottomSheetRef.current?.collapse()} />}
         <View style={styles.contentContainer}>
           <Text style={styles.title}>Prijavljena ekipa</Text>
-          {dummyData.map((dummy, index) => (
-            <Fragment key={dummy}>
+          {dummyData.map((name, index) => (
+            <View key={name}>
               <Text style={styles.player}>
-                {index + 1}. {dummy}
+                {index + 1}. {name}
               </Text>
               {index !== dummyData.length - 1 && (
                 <View style={styles.separator}>
-                  <DashedLine dashLength={5} dashThickness={1} />
+                  <DashedLine dashLength={5} dashThickness={0.6} dashGap={5} dashColor={colors.gray} />
                 </View>
               )}
-            </Fragment>
+            </View>
           ))}
         </View>
       </View>
