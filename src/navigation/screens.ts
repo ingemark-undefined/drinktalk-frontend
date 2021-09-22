@@ -3,6 +3,8 @@ enum Screen {
   HOME = 'Home',
   GAME = 'Game',
   COUNTDOWN = 'Countdown',
+  LOSER = 'Loser',
+  SUCCESS = 'Success',
 }
 
 export default Screen;
