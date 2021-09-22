@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import RNBootSplash from 'react-native-bootsplash';
 
-import { Login, Home, Loser } from '@screens/index';
+import { Login, Home, Loser, Success } from '@screens/index';
 
 import screen from '@navigation/screens';
 import colors from '@constants/colors';
@@ -13,6 +13,7 @@ export type NavigatorParamList = {
   Login: undefined;
   Home: { name: string };
   Loser: undefined;
+  Success: undefined;
 };
 
 export interface NavigatorProps {}
@@ -24,6 +25,7 @@ const Navigator: React.FunctionComponent<NavigatorProps> = () => {
     <NavigationContainer onReady={() => RNBootSplash.hide({ fade: true })}>
       <Stack.Navigator screenOptions={{ headerShown: false, cardStyle: styles.cardStyle }}>
         <Stack.Screen name={screen.LOSER} component={Loser} />
+        <Stack.Screen name={screen.SUCCESS} component={Success} />
         <Stack.Screen name={screen.LOGIN} component={Login} />
         <Stack.Screen name={screen.HOME} component={Home} />
       </Stack.Navigator>
