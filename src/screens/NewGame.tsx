@@ -51,6 +51,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
             ArrowUpIconComponent={() => <Icon icon={ChevronUpIcon} />}
             ArrowDownIconComponent={() => <Icon icon={ChevronDownIcon} />}
             props={{ activeOpacity: 1 }}
+            zIndex={0}
           />
         </View>
       </View>
