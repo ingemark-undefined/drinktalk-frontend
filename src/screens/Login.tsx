@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { TouchableWithoutFeedback, KeyboardAvoidingView, View, StyleSheet, Keyboard, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 
 import { CircleButton, Icon, TextField } from '@components/index';
 
-import { LogoIcon } from '@assets/icons/index';
-import screen from '@navigation/screens';
-import { NavigatorParamList } from '@navigation/Navigator';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { NavigatorParamList } from '@navigation/Navigator';
+import { LogoIcon } from '@assets/icons/index';
+import { setUser } from '@redux/gameSlice';
+import screen from '@navigation/screens';
 
 type LoginScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.LOGIN>;
 
@@ -16,14 +18,15 @@ interface LoginProps {}
 const Login: React.FunctionComponent<LoginProps> = () => {
   const navigation = useNavigation<LoginScreenNavigationProp>();
   const [name, setName] = useState<string>('');
+  const dispatch = useDispatch();
 
   const handleSubmit = () => {
     if (!name) {
-      Alert.alert('Molimo popuni svoj nadimak/ime!');
-      return;
+      return Alert.alert('Molimo popuni svoj nadimak/ime!');
     }
 
-    navigation.navigate(screen.HOME, { name });
+    dispatch(setUser(name));
+    navigation.navigate(screen.HOME);
   };
 
   return (

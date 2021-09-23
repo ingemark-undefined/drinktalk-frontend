@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { accelerometer, setUpdateIntervalForType, SensorTypes } from 'react-native-sensors';
 import BackgroundService from 'react-native-background-actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { BottomButton, CircleButton, Icon, Screen } from '@components/index';
 
@@ -12,7 +13,9 @@ import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
-import socket from '../utils/ws';
+import socket from '@utils/ws';
+import { RootState } from '@redux/store';
+import { newGame } from '@redux/gameSlice';
 
 type HomeScreenRouteProp = RouteProp<NavigatorParamList, screen.HOME>;
 type HomeScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.HOME>;
@@ -26,8 +29,8 @@ const veryIntensiveTask = async (taskDataArguments) => {
   await new Promise(async (resolve) => {
     setUpdateIntervalForType(SensorTypes.accelerometer, 100);
 
-    socket.on('gameId', (gameId) => {
-      console.log(gameId);
+    socket.on('joined', (user) => {
+      console.log(user);
     });
 
     // const subscription = accelerometer.subscribe(({ x, y, z, timestamp }) => console.log({ x, y, z, timestamp }));
@@ -49,14 +52,15 @@ const options = {
   },
 };
 
-const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
+const Home: React.FunctionComponent<HomeProps> = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const { name } = route.params;
+  const { user } = useSelector((state: RootState) => state.game);
+  const dispatch = useDispatch();
 
   const handleNewGame = () => {
     socket.emit('game:new', 90);
     socket.on('gameId', (gameId) => {
-      console.log(gameId);
+      dispatch(newGame(gameId));
       navigation.navigate(screen.NEW_GAME);
     });
   };
@@ -76,10 +80,10 @@ const Home: React.FunctionComponent<HomeProps> = ({ route }) => {
       <TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
         <Icon width={20} height={20} icon={ChevronLeftIcon} />
       </TouchableOpacity>
-      <Icon width={140} height={140} icon={LogoIcon} style={styles.logoIcon} />
+      <LogoIcon style={styles.logoIcon} />
       <View style={styles.textContainer}>
         <Text style={[styles.text, styles.white]}>Hellou</Text>
-        <Text style={styles.text}>{name}</Text>
+        <Text style={styles.text}>{user}</Text>
       </View>
 
       <CircleButton

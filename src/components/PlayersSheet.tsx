@@ -8,15 +8,23 @@ import CloseButton from './CloseButton';
 import Player from './Player';
 import Separator from './Separator';
 
+import { useAppSelector } from '@redux/hooks';
 import colors from '@constants/colors';
-
-const dummyData = ['Krešo Orešković', 'Predrag Kežić', 'Mislav Čotić', 'Predrag Kežić2', 'Mislav Čotić2'];
 
 const App = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [expanded, setExpanded] = useState<boolean>(false);
+  const { players } = useAppSelector((state) => state.game);
 
-  const snapPoints = useMemo(() => ['42%', '100%'], []);
+  const snapPoints = useMemo(() => {
+    // We are showing max 3 players when first snap point is active
+    if (players.length > 3) {
+      return [180 + 3 * 50, '100%'];
+    }
+
+    // If less or equal than 3 players, expand the sheet as needed
+    return [180 + players.length * 50, '100%'];
+  }, [players]);
 
   return (
     <BottomSheet
@@ -30,7 +38,7 @@ const App = () => {
         {expanded && <CloseButton style={styles.closeButton} onPress={() => bottomSheetRef.current?.collapse()} />}
         <View style={styles.contentContainer}>
           <Text style={styles.title}>Prijavljena ekipa</Text>
-          <FlatList data={dummyData} renderItem={Player} keyExtractor={(item) => item} ItemSeparatorComponent={Separator} />
+          <FlatList data={players} renderItem={Player} keyExtractor={(item) => item} ItemSeparatorComponent={Separator} />
         </View>
       </View>
     </BottomSheet>
