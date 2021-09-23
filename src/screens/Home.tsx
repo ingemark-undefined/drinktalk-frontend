@@ -74,15 +74,6 @@ const styles = StyleSheet.create({
     top: 50,
     left: 38,
   },
-  shadow: {
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 7,
-  },
   logoIcon: {
     marginTop: 70,
   },
