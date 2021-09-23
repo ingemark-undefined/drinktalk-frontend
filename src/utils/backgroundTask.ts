@@ -33,6 +33,9 @@ const veryIntensiveTask = async () => {
           // Send notification
           sendLoserNotification({ title: 'LUUUZER SI TI', message: 'Mobitel se pomaknuo pa plaćaš rundu!' });
 
+          // Show loser screen
+          storage.setString('loser', socket.auth.user);
+
           // Unsubscribe from the accelerometer and stop the task
           subscription.unsubscribe();
           await BackgroundService.stop();
