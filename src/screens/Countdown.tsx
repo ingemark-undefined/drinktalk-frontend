@@ -3,6 +3,7 @@ import { Animated, StyleSheet, Text, View } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 
 import { Screen, Instructions } from '@components/index';
 import screen from '@navigation/screens';
@@ -15,6 +16,7 @@ import socket from '@utils/ws';
 import { RootState } from '@redux/store';
 import { scheduleWinNotification } from '@utils/notifications';
 import { setTime } from '@redux/gameSlice';
+import { storage } from '@hooks/useStorage';
 
 type CountdownScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.COUNTDOWN>;
 
@@ -37,6 +39,7 @@ const Countdown: React.FunctionComponent<CountdownProps> = () => {
     // Schedule local notification
     scheduleWinNotification(time);
     navigation.replace(screen.GAME);
+    storage.setString('endsAt', dayjs().add(time, 'minutes').toISOString());
   };
 
   return (

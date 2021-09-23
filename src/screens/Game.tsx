@@ -7,9 +7,11 @@ import { Screen, Instructions } from '@components/index';
 
 import { startBackgroundTask } from '@utils/backgroundTask';
 import { useNavigation } from '@react-navigation/core';
-import { useStorage } from '@hooks/useStorage';
+import { storage, useStorage } from '@hooks/useStorage';
 import socket from '@utils/ws';
 import screen from '@navigation/screens';
+import useInterval from '@hooks/useInterval';
+import dayjs from 'dayjs';
 
 interface GameProps {}
 
@@ -31,6 +33,13 @@ const Game: React.FunctionComponent<GameProps> = () => {
       navigation.replace(screen.LOSER);
     }
   }, [loser, navigation]);
+
+  useInterval(async () => {
+    const endsAt = storage.getString('endsAt');
+    if (dayjs().isAfter(dayjs(endsAt))) {
+      navigation.replace(screen.SUCCESS);
+    }
+  }, 1000);
 
   return (
     <Screen style={styles.container}>

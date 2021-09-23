@@ -28,6 +28,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
 
   useEffect(() => {
     storage.removeItem('loser');
+    storage.removeItem('endsAt');
   }, []);
 
   const handleNewGame = () => {
