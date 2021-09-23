@@ -1,3 +1,4 @@
+import PushNotification from 'react-native-push-notification';
 import BackgroundService from 'react-native-background-actions';
 import { accelerometer, SensorData, SensorTypes, setUpdateIntervalForType } from 'react-native-sensors';
 
@@ -20,6 +21,8 @@ const veryIntensiveTask = async () => {
         if (Math.abs(x - prev.x) > 5 || Math.abs(y - prev.y) > 5 || Math.abs(z - prev.z) > 1.5) {
           // Disconnect from the game
           socket.close();
+
+          PushNotification.cancelAllLocalNotifications();
 
           // Send notification
           sendLoserNotification({ title: 'LUUUZER SI TI', message: 'Mobitel se pomaknuo pa plaćaš rundu!' });

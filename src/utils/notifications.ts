@@ -36,3 +36,16 @@ export const sendLoserNotification = ({ title, message }: { title: string; messa
     message: message,
   });
 };
+
+export const scheduleWinNotification = (time: number) => {
+  PushNotification.localNotificationSchedule({
+    date: new Date(Date.now() + time * 60 * 1000),
+    channelId: 'drinktalk',
+    autoCancel: true,
+    vibrate: true,
+    ongoing: false,
+    invokeApp: true,
+    title: 'Bravo!',
+    message: 'Vi ste prava ekipa koja može zaboraviti tehnologiju na tren',
+  });
+};
