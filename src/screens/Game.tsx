@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import PushNotification from 'react-native-push-notification';
+import BackgroundService from 'react-native-background-actions';
 
 import { Screen, Instructions } from '@components/index';
 
@@ -14,6 +15,7 @@ const Game: React.FunctionComponent<GameProps> = () => {
     startBackgroundTask();
 
     socket.on('left', () => {
+      BackgroundService.stop();
       PushNotification.cancelAllLocalNotifications();
     });
   }, []);
