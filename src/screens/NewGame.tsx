@@ -15,7 +15,6 @@ import socket from '@utils/ws';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { RootState } from '@redux/store';
-import { startBackgroundTask } from '@utils/backgroundTask';
 
 type NewGameScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.NEW_GAME>;
 
@@ -32,10 +31,6 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
     socket.on('joined', (user) => dispatch(addPlayer(user)));
     socket.on('left', (user) => dispatch(removePlayer(user)));
   }, [dispatch]);
-
-  useEffect(() => {
-    startBackgroundTask();
-  }, []);
 
   const handleStartGame = () => {
     navigation.replace(screen.COUNTDOWN);

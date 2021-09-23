@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Screen, Instructions } from '@components/index';
 
+import { startBackgroundTask } from '@utils/backgroundTask';
+
 interface GameProps {}
 
 const Game: React.FunctionComponent<GameProps> = () => {
+  useEffect(() => {
+    startBackgroundTask();
+  }, []);
+
   return (
     <Screen style={styles.container}>
       <Instructions />
