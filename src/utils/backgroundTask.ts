@@ -16,12 +16,12 @@ const veryIntensiveTask = async (_) => {
       console.log(user);
     });
 
-    const subscription = accelerometer.subscribe(({ x, y, z }) => {
+    const subscription = accelerometer.subscribe(async ({ x, y, z }) => {
       if (prev) {
         if (Math.abs(x - prev.x) > 5 || Math.abs(y - prev.y) > 5 || (Math.abs(z - prev.z) > 1.5 && !sent)) {
-          console.log('SENT INSIDE', sent);
           sendLoserNotification();
-          sent = true;
+          subscription.unsubscribe();
+          await BackgroundService.stop();
         }
       }
 
