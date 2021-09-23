@@ -29,7 +29,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
 
   const handleNewGame = () => {
     socket.connect();
-    socket.emit('game:new', 90);
+    socket.emit('game:new');
     socket.on('gameId', (gameId) => {
       dispatch(newGame(gameId));
       navigation.navigate(screen.NEW_GAME);
