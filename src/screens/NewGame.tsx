@@ -34,7 +34,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
   }, [dispatch]);
 
   const handleStartGame = () => {
-    socket.emit('game:start');
+    socket.emit('game:start', time);
     navigation.replace(screen.COUNTDOWN);
   };
 

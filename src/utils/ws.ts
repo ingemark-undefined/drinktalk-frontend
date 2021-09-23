@@ -1,5 +1,6 @@
 import { io } from 'socket.io-client';
+import Config from 'react-native-config';
 
-const socket = io('http://192.168.1.4:4000', { autoConnect: false });
+const socket = io(Config.WS_ENDPOINT, { autoConnect: false });
 
 export default socket;
