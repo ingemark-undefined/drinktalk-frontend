@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import BottomSheet from '@gorhom/bottom-sheet';
+import { MotiView } from 'moti';
 
 import SheetHandle from './SheetHandle';
 import CloseButton from './CloseButton';
@@ -34,11 +35,20 @@ const PlayersSheet = () => {
       snapPoints={snapPoints}
       onChange={(index) => (index ? setExpanded(true) : setExpanded(false))}
       handleComponent={!expanded ? () => <SheetHandle onPress={() => bottomSheetRef.current?.expand()} /> : null}>
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         {expanded && <CloseButton style={styles.closeButton} onPress={() => bottomSheetRef.current?.collapse()} />}
         <View style={styles.contentContainer}>
-          <Text style={styles.title}>Prijavljena ekipa</Text>
-          <FlatList data={players} renderItem={Player} keyExtractor={(item) => item} ItemSeparatorComponent={Separator} />
+          <MotiView
+            from={{
+              transform: [{ translateY: expanded ? 0 : 60 }],
+            }}
+            animate={{
+              transform: [{ translateY: expanded ? 60 : 0 }],
+            }}
+            transition={{ type: 'spring', damping: 20 }}>
+            <Text style={styles.title}>Prijavljena ekipa</Text>
+            <FlatList data={players} renderItem={Player} keyExtractor={(item) => item} ItemSeparatorComponent={Separator} />
+          </MotiView>
         </View>
       </View>
     </BottomSheet>
@@ -49,6 +59,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 25,
+    marginTop: 20,
     width: '100%',
   },
   contentContainer: {
@@ -56,8 +67,8 @@ const styles = StyleSheet.create({
     marginRight: 60,
   },
   closeButton: {
-    alignSelf: 'flex-end',
-    marginRight: 24,
+    position: 'absolute',
+    right: 24,
   },
   title: {
     fontFamily: 'BarutaBlack',

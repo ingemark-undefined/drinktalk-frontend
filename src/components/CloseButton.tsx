@@ -17,7 +17,7 @@ const CloseButton: React.FunctionComponent<CloseButtonProps> = ({ style, ...prop
       <MotiView
         from={{
           opacity: 0,
-          scale: 0.9,
+          scale: 1,
         }}
         animate={{
           opacity: 1,
@@ -25,10 +25,10 @@ const CloseButton: React.FunctionComponent<CloseButtonProps> = ({ style, ...prop
         }}
         exit={{
           opacity: 0,
-          scale: 0.9,
+          scale: 1,
         }}>
         <TouchableOpacity style={[styles.button, style]} {...props}>
-          <Icon width={20} height={20} icon={CloseIcon} />
+          <Icon width={25} height={25} icon={CloseIcon} />
         </TouchableOpacity>
       </MotiView>
     </AnimatePresence>

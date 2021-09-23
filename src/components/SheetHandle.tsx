@@ -36,7 +36,8 @@ const SheetHandle: React.FunctionComponent<SheetHandleProps> = ({ ...props }) =>
 const styles = StyleSheet.create({
   handle: {
     alignSelf: 'center',
-    marginTop: -20,
+    position: 'absolute',
+    top: -20,
     backgroundColor: colors.black,
     width: 40,
     height: 40,
