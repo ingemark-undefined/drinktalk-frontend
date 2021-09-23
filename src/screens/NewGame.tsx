@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import QRCode from 'react-native-qrcode-svg';
 
 import { BottomButton, Icon, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
 
+import { addPlayer, removePlayer } from '@redux/gameSlice';
 import { ChevronLeftIcon } from '@assets/icons';
 import colors from '@constants/colors';
-import { NavigatorParamList } from '@navigation/Navigator';
 import screen from '@navigation/screens';
+import socket from '@utils/ws';
+
 import { StackNavigationProp } from '@react-navigation/stack';
+import { NavigatorParamList } from '@navigation/Navigator';
+import { RootState } from '@redux/store';
 
 type NewGameScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.NEW_GAME>;
 
@@ -17,8 +22,19 @@ interface NewGameProps {}
 
 const NewGame: React.FunctionComponent<NewGameProps> = () => {
   const navigation = useNavigation<NewGameScreenNavigationProp>();
+  const { gameId } = useSelector((state: RootState) => state.game);
+  const dispatch = useDispatch();
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    socket.on('joined', (user) => dispatch(addPlayer(user)));
+    socket.on('left', (user) => dispatch(removePlayer(user)));
+  }, [dispatch]);
+
+  const handleStartGame = () => {
+    navigation.replace(screen.COUNTDOWN);
+  };
 
   return (
     <Screen style={styles.container}>
@@ -27,7 +43,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
         <Icon width={20} height={20} icon={ChevronLeftIcon} />
       </TouchableOpacity>
       <View style={styles.qrCodeContainer}>
-        <QRCode value="test" size={120} />
+        <QRCode value={gameId} size={120} />
       </View>
 
       <View style={styles.timeContainer}>
@@ -37,7 +53,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
       <PlayersSheet />
       <BottomButton
         title="Kreni s igrom"
-        onPress={() => {}}
+        onPress={handleStartGame}
         style={{ backgroundColor: colors.black }}
         textStyle={{ color: colors.white }}
       />
@@ -69,6 +85,9 @@ const styles = StyleSheet.create({
     marginTop: 130,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: colors.black,
+    elevation: 15,
+    zIndex: 0,
   },
   timeContainer: {
     alignItems: 'center',
