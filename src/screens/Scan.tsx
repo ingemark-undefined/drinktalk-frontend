@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -21,6 +21,13 @@ const Scan: React.FunctionComponent<ScanProps> = () => {
   const onScan = ({ data }: { data: string }) => {
     socket.connect();
     socket.emit('game:join', data);
+
+    socket.on('exception', (exception: string) => {
+      if (exception === 'GameDoesNotExist') {
+        Alert.alert('Kod koji si skenirao nije ispravan!');
+      }
+    });
+
     socket.on('game', () => {
       navigation.replace(screen.COUNTDOWN);
     });
