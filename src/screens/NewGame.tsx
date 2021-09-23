@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import Androw from 'react-native-androw';
 import QRCode from 'react-native-qrcode-svg';
 
 import { BottomButton, Icon, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
@@ -42,10 +43,20 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
       <TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
         <Icon width={20} height={20} icon={ChevronLeftIcon} />
       </TouchableOpacity>
-      <View style={styles.qrCodeContainer}>
-        <QRCode value={gameId} size={120} />
-      </View>
-
+      <Androw
+        style={{
+          shadowColor: colors.black,
+          shadowOffset: {
+            width: 0,
+            height: 10,
+          },
+          shadowOpacity: 0.15,
+          shadowRadius: 7,
+        }}>
+        <View style={styles.qrCodeContainer}>
+          <QRCode value={gameId} size={120} />
+        </View>
+      </Androw>
       <View style={styles.timeContainer}>
         <Text style={styles.timeText}>Vrijeme igre</Text>
         <Button onPress={() => setIsVisible(true)} title="Odaberi" picker />
@@ -85,9 +96,6 @@ const styles = StyleSheet.create({
     marginTop: 130,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: colors.black,
-    elevation: 15,
-    zIndex: 0,
   },
   timeContainer: {
     alignItems: 'center',
