@@ -28,6 +28,7 @@
     "react-native-countdown-circle-timer": "^2.5.4",
     "react-native-dashed-line": "^1.1.0",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-mmkv-storage": "^0.6.4",
     "react-native-modal": "^13.0.0",
     "react-native-push-notification": "^8.1.0",
     "react-native-qrcode-scanner": "^1.5.4",

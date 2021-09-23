@@ -6554,6 +6554,11 @@ react-native-gesture-handler@^1.10.3:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-mmkv-storage@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/react-native-mmkv-storage/-/react-native-mmkv-storage-0.6.4.tgz#a2e01781147bde96ddaeebc8fec2be5eed909f41"
+  integrity sha512-55K8RRm0ZPpN8RbFjMdoBZWo2S7e9RkIYIB8HsI5toGAwpMvM68nORPtW/Q3XhRZJ8PA6wE5wGyTOTEgbGyeGA==
+
 react-native-modal@^13.0.0:
   version "13.0.0"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-13.0.0.tgz#b7117400cae8548e713eed760077dee44f78628e"
