@@ -1,29 +1,35 @@
 import BackgroundService from 'react-native-background-actions';
-import { accelerometer, SensorTypes, setUpdateIntervalForType } from 'react-native-sensors';
+import { accelerometer, SensorData, SensorTypes, setUpdateIntervalForType } from 'react-native-sensors';
 
 import socket from '@utils/ws';
 import { sendLoserNotification } from './notifications';
 
-const veryIntensiveTask = async (_) => {
-  let prev: any;
+const veryIntensiveTask = async () => {
+  let prev: SensorData;
 
   await new Promise(async () => {
     setUpdateIntervalForType(SensorTypes.accelerometer, 100);
 
-    // socket.on('joined', (user) => {
-    //   console.log(user);
-    // });
+    // Listen for when someone loses
+    socket.on('left', (user: string) => {
+      sendLoserNotification({ title: `LUUUZER JE ${user.toUpperCase()}`, message: 'Ne sluša ekipu i plaća ovu rundu.' });
+    });
 
-    const subscription = accelerometer.subscribe(async ({ x, y, z }) => {
+    const subscription = accelerometer.subscribe(async ({ x, y, z, timestamp }) => {
       if (prev) {
         if (Math.abs(x - prev.x) > 5 || Math.abs(y - prev.y) > 5 || Math.abs(z - prev.z) > 1.5) {
-          sendLoserNotification();
+          // Disconnect from the game
+          socket.close();
+
+          // Send notification
+          sendLoserNotification({ title: 'LUUUZER SI TI', message: 'Mobitel se pomaknuo pa plaćaš rundu!' });
+
+          // Unsubscribe from the accelerometer and stop the task
           subscription.unsubscribe();
           await BackgroundService.stop();
         }
       }
-
-      prev = { x, y, z };
+      prev = { x, y, z, timestamp };
     });
   });
 };
