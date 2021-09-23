@@ -6,19 +6,17 @@ import { sendLoserNotification } from './notifications';
 
 const veryIntensiveTask = async (_) => {
   let prev: any;
-  let sent: boolean = false;
 
-  // Example of an infinite loop task
   await new Promise(async () => {
     setUpdateIntervalForType(SensorTypes.accelerometer, 100);
 
-    socket.on('joined', (user) => {
-      console.log(user);
-    });
+    // socket.on('joined', (user) => {
+    //   console.log(user);
+    // });
 
     const subscription = accelerometer.subscribe(async ({ x, y, z }) => {
       if (prev) {
-        if (Math.abs(x - prev.x) > 5 || Math.abs(y - prev.y) > 5 || (Math.abs(z - prev.z) > 1.5 && !sent)) {
+        if (Math.abs(x - prev.x) > 5 || Math.abs(y - prev.y) > 5 || Math.abs(z - prev.z) > 1.5) {
           sendLoserNotification();
           subscription.unsubscribe();
           await BackgroundService.stop();
