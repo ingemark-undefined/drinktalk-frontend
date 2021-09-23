@@ -7,7 +7,7 @@ import QRCode from 'react-native-qrcode-svg';
 
 import { BottomButton, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
 
-import { addPlayer, endGame, removePlayer } from '@redux/gameSlice';
+import { addPlayer, removePlayer } from '@redux/gameSlice';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 import socket from '@utils/ws';
@@ -38,16 +38,10 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
     navigation.replace(screen.COUNTDOWN);
   };
 
-  const handleBack = () => {
-    dispatch(endGame());
-    socket.close();
-    navigation.goBack();
-  };
-
   return (
     <Screen style={styles.container}>
       <TimePicker visible={isVisible} setVisible={setIsVisible} />
-      <BackButton onPress={handleBack} />
+      <BackButton />
 
       <Androw style={styles.shadow}>
         <View style={styles.qrCodeContainer}>{gameId && <QRCode value={gameId} size={120} />}</View>

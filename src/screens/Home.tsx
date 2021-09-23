@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,17 +24,22 @@ interface HomeProps {}
 const Home: React.FunctionComponent<HomeProps> = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const { user } = useSelector((state: RootState) => state.game);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    socket.off();
+    socket.close();
     storage.removeItem('loser');
     storage.removeItem('endsAt');
   }, []);
 
   const handleNewGame = () => {
+    setLoading(true);
     socket.connect();
     socket.emit('game:new');
     socket.on('gameId', (gameId) => {
+      setLoading(false);
       dispatch(newGame(gameId));
       navigation.navigate(screen.NEW_GAME);
     });
@@ -54,6 +59,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
         title="Kreiraj igru"
         onPress={handleNewGame}
         style={styles.createButton}
+        loading={loading}
         textStyle={{ fontSize: fontSize.mediumLarge }}
       />
       <BottomButton title="Prijavi se u postojeću igru" onPress={() => navigation.navigate(screen.SCAN)} />
