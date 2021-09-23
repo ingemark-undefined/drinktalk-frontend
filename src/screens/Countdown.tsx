@@ -1,13 +1,13 @@
 import React from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { useNavigation } from '@react-navigation/core';
 
 import { Screen, Instructions } from '@components/index';
 import screen from '@navigation/screens';
 
 import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
-import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
 
