@@ -6,7 +6,7 @@ import QRCode from 'react-native-qrcode-svg';
 
 import { BottomButton, Icon, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
 
-import { addPlayer, removePlayer } from '@redux/gameSlice';
+import { addPlayer, endGame, removePlayer } from '@redux/gameSlice';
 import { ChevronLeftIcon } from '@assets/icons';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
@@ -33,18 +33,23 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
   }, [dispatch]);
 
   const handleStartGame = () => {
+    socket.emit('game:start');
     navigation.replace(screen.COUNTDOWN);
+  };
+
+  const handleBack = () => {
+    dispatch(endGame());
+    socket.close();
+    navigation.goBack();
   };
 
   return (
     <Screen style={styles.container}>
       <TimePicker visible={isVisible} setVisible={setIsVisible} />
-      <TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
+      <TouchableOpacity onPress={handleBack} style={styles.backButton}>
         <Icon width={20} height={20} icon={ChevronLeftIcon} />
       </TouchableOpacity>
-      <View style={styles.qrCodeContainer}>
-        <QRCode value={gameId} size={120} />
-      </View>
+      <View style={styles.qrCodeContainer}>{gameId && <QRCode value={gameId} size={120} />}</View>
 
       <View style={styles.timeContainer}>
         <Text style={styles.timeText}>Vrijeme igre</Text>
