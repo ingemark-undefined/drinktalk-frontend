@@ -9,6 +9,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { LogoIcon } from '@assets/icons/index';
 import { setUser } from '@redux/gameSlice';
+import socket from '@utils/ws';
 import screen from '@navigation/screens';
 
 type LoginScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.LOGIN>;
@@ -26,6 +27,7 @@ const Login: React.FunctionComponent<LoginProps> = () => {
     }
 
     dispatch(setUser(name));
+    socket.auth = { user: name };
     navigation.navigate(screen.HOME);
   };
 

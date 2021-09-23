@@ -28,7 +28,6 @@ const Home: React.FunctionComponent<HomeProps> = () => {
   const dispatch = useDispatch();
 
   const handleNewGame = () => {
-    socket.auth = { user };
     socket.connect();
     socket.emit('game:new', 90);
     socket.on('gameId', (gameId) => {
