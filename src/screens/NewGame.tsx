@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Androw from 'react-native-androw';
 import QRCode from 'react-native-qrcode-svg';
 
-import { BottomButton, Icon, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
+import { BottomButton, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
 
 import { addPlayer, endGame, removePlayer } from '@redux/gameSlice';
-import { ChevronLeftIcon } from '@assets/icons';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 import socket from '@utils/ws';
@@ -16,6 +15,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { RootState } from '@redux/store';
 import timeFormat from '@utils/timeFormat';
+import BackButton from '@components/BackButton';
 
 type NewGameScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.NEW_GAME>;
 
@@ -47,9 +47,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
   return (
     <Screen style={styles.container}>
       <TimePicker visible={isVisible} setVisible={setIsVisible} />
-      <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-        <Icon width={20} height={20} icon={ChevronLeftIcon} />
-      </TouchableOpacity>
+      <BackButton onPress={handleBack} />
 
       <Androw style={styles.shadow}>
         <View style={styles.qrCodeContainer}>{gameId && <QRCode value={gameId} size={120} />}</View>
@@ -72,17 +70,6 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-  },
-  backButton: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.white,
-    padding: 14,
-    borderRadius: 24,
-    position: 'absolute',
-    top: 50,
-    left: 38,
   },
   shadow: {
     shadowColor: colors.black,

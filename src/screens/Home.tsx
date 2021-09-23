@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { BottomButton, CircleButton, Icon, Screen } from '@components/index';
+import { BottomButton, CircleButton, Screen } from '@components/index';
 
-import { LogoIcon, ChevronLeftIcon } from '@assets/icons';
+import { LogoIcon } from '@assets/icons';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
@@ -14,6 +14,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import socket from '@utils/ws';
 import { RootState } from '@redux/store';
 import { newGame } from '@redux/gameSlice';
+import BackButton from '@components/BackButton';
 
 type HomeScreenRouteProp = RouteProp<NavigatorParamList, screen.HOME>;
 type HomeScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.HOME>;
@@ -38,9 +39,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
 
   return (
     <Screen style={styles.container}>
-      <TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
-        <Icon width={20} height={20} icon={ChevronLeftIcon} />
-      </TouchableOpacity>
+      <BackButton />
       <LogoIcon style={styles.logoIcon} />
       <View style={styles.textContainer}>
         <Text style={[styles.text, styles.white]}>Hellou</Text>
@@ -63,17 +62,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  backButton: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.white,
-    padding: 14,
-    borderRadius: 24,
-    position: 'absolute',
-    top: 50,
-    left: 38,
   },
   logoIcon: {
     marginTop: 70,
