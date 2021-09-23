@@ -38,7 +38,7 @@ const veryIntensiveTask = async () => {
 };
 
 const options = {
-  taskName: 'Example',
+  taskName: 'GameInProgress',
   taskTitle: 'Igra započeta',
   taskDesc: 'Ne pomiči mobitel kako bi pobijedio/la',
   taskIcon: {
