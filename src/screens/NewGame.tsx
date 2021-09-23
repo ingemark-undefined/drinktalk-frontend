@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import Androw from 'react-native-androw';
 import QRCode from 'react-native-qrcode-svg';
 
 import { BottomButton, Icon, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
@@ -11,7 +12,6 @@ import { ChevronLeftIcon } from '@assets/icons';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 import socket from '@utils/ws';
-
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { RootState } from '@redux/store';
@@ -50,8 +50,10 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
       <TouchableOpacity onPress={handleBack} style={styles.backButton}>
         <Icon width={20} height={20} icon={ChevronLeftIcon} />
       </TouchableOpacity>
-      <View style={styles.qrCodeContainer}>{gameId && <QRCode value={gameId} size={120} />}</View>
 
+      <Androw style={styles.shadow}>
+        <View style={styles.qrCodeContainer}>{gameId && <QRCode value={gameId} size={120} />}</View>
+      </Androw>
       <View style={styles.timeContainer}>
         <Text style={styles.timeText}>Vrijeme igre</Text>
         <Button onPress={() => setIsVisible(true)} title={timeFormat(time) || 'Odaberi'} picker />
@@ -82,6 +84,15 @@ const styles = StyleSheet.create({
     top: 50,
     left: 38,
   },
+  shadow: {
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 7,
+  },
   qrCodeContainer: {
     backgroundColor: colors.white,
     width: 170,
@@ -91,9 +102,6 @@ const styles = StyleSheet.create({
     marginTop: 130,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: colors.black,
-    elevation: 15,
-    zIndex: 0,
   },
   timeContainer: {
     alignItems: 'center',

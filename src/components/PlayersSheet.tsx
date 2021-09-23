@@ -11,7 +11,7 @@ import Separator from './Separator';
 import { useAppSelector } from '@redux/hooks';
 import colors from '@constants/colors';
 
-const App = () => {
+const PlayersSheet = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [expanded, setExpanded] = useState<boolean>(false);
   const { players } = useAppSelector((state) => state.game);
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default PlayersSheet;

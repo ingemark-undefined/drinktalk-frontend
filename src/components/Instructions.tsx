@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontFamily: 'GothamRoundedBold',
+    textAlign: 'center',
   },
   margin: {
     marginBottom: 30,
