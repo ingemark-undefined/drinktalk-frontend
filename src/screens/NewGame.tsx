@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Androw from 'react-native-androw';
 import QRCode from 'react-native-qrcode-svg';
+import BackgroundService from 'react-native-background-actions';
+import { accelerometer, SensorTypes, setUpdateIntervalForType } from 'react-native-sensors';
 
 import { BottomButton, Icon, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
 
@@ -12,14 +14,55 @@ import { ChevronLeftIcon } from '@assets/icons';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 import socket from '@utils/ws';
-
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { RootState } from '@redux/store';
+import { sendLoserNotification } from '@utils/notifications';
 
 type NewGameScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.NEW_GAME>;
 
 interface NewGameProps {}
+
+let prev: any;
+let sent: boolean = false;
+
+const veryIntensiveTask = async (_) => {
+  // Example of an infinite loop task
+  await new Promise(async () => {
+    setUpdateIntervalForType(SensorTypes.accelerometer, 100);
+
+    socket.on('joined', (user) => {
+      console.log(user);
+    });
+
+    const subscription = accelerometer.subscribe(({ x, y, z, timestamp }) => {
+      if (prev) {
+        if (Math.abs(x - prev.x) > 5 || Math.abs(y - prev.y) > 5 || (Math.abs(z - prev.z) > 1.5 && !sent)) {
+          console.log('SENT INSIDE', sent);
+          sendLoserNotification();
+          sent = true;
+        }
+      }
+
+      prev = { x, y, z };
+    });
+  });
+};
+
+const options = {
+  taskName: 'Example',
+  taskTitle: 'Pocela igra',
+  taskDesc: 'Ajmoooooooooooooooooooooo',
+  taskIcon: {
+    name: 'ic_launcher',
+    type: 'mipmap',
+  },
+  color: '#ff00ff',
+  linkingURI: 'yourSchemeHere://chat/jane', // See Deep Linking for more info
+  parameters: {
+    delay: 1000,
+  },
+};
 
 const NewGame: React.FunctionComponent<NewGameProps> = () => {
   const navigation = useNavigation<NewGameScreenNavigationProp>();
@@ -32,6 +75,17 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
     socket.on('joined', (user) => dispatch(addPlayer(user)));
     socket.on('left', (user) => dispatch(removePlayer(user)));
   }, [dispatch]);
+
+  useEffect(() => {
+    const zapocni = async () => {
+      try {
+        await BackgroundService.start(veryIntensiveTask, options);
+      } catch (err) {
+        console.log('error', err);
+      }
+    };
+    zapocni();
+  }, []);
 
   const handleStartGame = () => {
     navigation.replace(screen.COUNTDOWN);

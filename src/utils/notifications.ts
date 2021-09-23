@@ -24,3 +24,15 @@ PushNotification.createChannel(
   },
   (created: boolean) => console.log(`createChannel returned '${created}'`),
 );
+
+export const sendLoserNotification = () => {
+  PushNotification.localNotification({
+    channelId: 'drinktalk',
+    autoCancel: true, // (optional) default: true
+    vibrate: true,
+    ongoing: false, // (optional) set whether this is an "ongoing" notification
+    invokeApp: true,
+    title: 'LUUUZER SI TI',
+    message: 'Mobitel se pomaknuo pa plaćaš rundu!',
+  });
+};
