@@ -11,7 +11,7 @@ const initialState: GameState = {
   user: '',
   gameId: null,
   players: [],
-  time: 0,
+  time: 90,
 };
 
 export const gameSlice = createSlice({
