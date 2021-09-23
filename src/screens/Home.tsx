@@ -28,7 +28,6 @@ const Home: React.FunctionComponent<HomeProps> = () => {
   const dispatch = useDispatch();
 
   const handleNewGame = () => {
-    socket.auth = { user };
     socket.connect();
     socket.emit('game:new', 90);
     socket.on('gameId', (gameId) => {
@@ -55,7 +54,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
         style={styles.createButton}
         textStyle={{ fontSize: fontSize.mediumLarge }}
       />
-      <BottomButton title="Prijavi se u postojeću igru" onPress={() => {}} />
+      <BottomButton title="Prijavi se u postojeću igru" onPress={() => navigation.navigate(screen.SCAN)} />
     </Screen>
   );
 };

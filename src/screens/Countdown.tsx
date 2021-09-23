@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { useNavigation } from '@react-navigation/core';
@@ -10,6 +10,7 @@ import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
+import socket from '@utils/ws';
 
 type CountdownScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.COUNTDOWN>;
 
@@ -17,6 +18,13 @@ interface CountdownProps {}
 
 const Countdown: React.FunctionComponent<CountdownProps> = () => {
   const navigation = useNavigation<CountdownScreenNavigationProp>();
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  useEffect(() => {
+    socket.on('started', () => {
+      setIsPlaying(true);
+    });
+  }, []);
 
   const handleStart = () => {
     navigation.replace(screen.GAME);
@@ -26,7 +34,7 @@ const Countdown: React.FunctionComponent<CountdownProps> = () => {
     <Screen style={styles.container}>
       <Text style={styles.text}>Spusti i ne diraj mobitel za</Text>
       <CountdownCircleTimer
-        isPlaying
+        isPlaying={isPlaying}
         duration={10}
         trailStrokeWidth={0}
         strokeWidth={10}
