@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Androw from 'react-native-androw';
 import QRCode from 'react-native-qrcode-svg';
-import BackgroundService from 'react-native-background-actions';
-import { accelerometer, SensorTypes, setUpdateIntervalForType } from 'react-native-sensors';
 
 import { BottomButton, Icon, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
 
@@ -17,52 +15,11 @@ import socket from '@utils/ws';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { RootState } from '@redux/store';
-import { sendLoserNotification } from '@utils/notifications';
+import { startBackgroundTask } from '@utils/backgroundTask';
 
 type NewGameScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.NEW_GAME>;
 
 interface NewGameProps {}
-
-let prev: any;
-let sent: boolean = false;
-
-const veryIntensiveTask = async (_) => {
-  // Example of an infinite loop task
-  await new Promise(async () => {
-    setUpdateIntervalForType(SensorTypes.accelerometer, 100);
-
-    socket.on('joined', (user) => {
-      console.log(user);
-    });
-
-    const subscription = accelerometer.subscribe(({ x, y, z, timestamp }) => {
-      if (prev) {
-        if (Math.abs(x - prev.x) > 5 || Math.abs(y - prev.y) > 5 || (Math.abs(z - prev.z) > 1.5 && !sent)) {
-          console.log('SENT INSIDE', sent);
-          sendLoserNotification();
-          sent = true;
-        }
-      }
-
-      prev = { x, y, z };
-    });
-  });
-};
-
-const options = {
-  taskName: 'Example',
-  taskTitle: 'Pocela igra',
-  taskDesc: 'Ajmoooooooooooooooooooooo',
-  taskIcon: {
-    name: 'ic_launcher',
-    type: 'mipmap',
-  },
-  color: '#ff00ff',
-  linkingURI: 'yourSchemeHere://chat/jane', // See Deep Linking for more info
-  parameters: {
-    delay: 1000,
-  },
-};
 
 const NewGame: React.FunctionComponent<NewGameProps> = () => {
   const navigation = useNavigation<NewGameScreenNavigationProp>();
@@ -77,14 +34,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const zapocni = async () => {
-      try {
-        await BackgroundService.start(veryIntensiveTask, options);
-      } catch (err) {
-        console.log('error', err);
-      }
-    };
-    zapocni();
+    startBackgroundTask();
   }, []);
 
   const handleStartGame = () => {
@@ -97,16 +47,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
       <TouchableOpacity onPress={navigation.goBack} style={styles.backButton}>
         <Icon width={20} height={20} icon={ChevronLeftIcon} />
       </TouchableOpacity>
-      <Androw
-        style={{
-          shadowColor: colors.black,
-          shadowOffset: {
-            width: 0,
-            height: 10,
-          },
-          shadowOpacity: 0.15,
-          shadowRadius: 7,
-        }}>
+      <Androw style={styles.shadow}>
         <View style={styles.qrCodeContainer}>
           <QRCode value={gameId} size={120} />
         </View>
@@ -140,6 +81,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 50,
     left: 38,
+  },
+  shadow: {
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 7,
   },
   qrCodeContainer: {
     backgroundColor: colors.white,
