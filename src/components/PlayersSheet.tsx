@@ -9,12 +9,12 @@ import Player from './Player';
 import Separator from './Separator';
 
 import colors from '@constants/colors';
-
-const dummyData = ['Krešo Orešković', 'Predrag Kežić', 'Mislav Čotić', 'Predrag Kežić2', 'Mislav Čotić2'];
+import { useAppSelector } from '../redux/hooks';
 
 const App = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [expanded, setExpanded] = useState<boolean>(false);
+  const { players } = useAppSelector((state) => state.game);
 
   const snapPoints = useMemo(() => ['42%', '100%'], []);
 
@@ -30,7 +30,7 @@ const App = () => {
         {expanded && <CloseButton style={styles.closeButton} onPress={() => bottomSheetRef.current?.collapse()} />}
         <View style={styles.contentContainer}>
           <Text style={styles.title}>Prijavljena ekipa</Text>
-          <FlatList data={dummyData} renderItem={Player} keyExtractor={(item) => item} ItemSeparatorComponent={Separator} />
+          <FlatList data={players} renderItem={Player} keyExtractor={(item) => item} ItemSeparatorComponent={Separator} />
         </View>
       </View>
     </BottomSheet>
