@@ -5,6 +5,7 @@ import { accelerometer, SensorData, SensorTypes, setUpdateIntervalForType } from
 import { sendLoserNotification } from './notifications';
 import { storage } from '@hooks/useStorage';
 import socket from '@utils/ws';
+import dayjs from 'dayjs';
 
 const veryIntensiveTask = async () => {
   let prev: SensorData;
@@ -14,11 +15,19 @@ const veryIntensiveTask = async () => {
 
     // Subscribe to accelerometer readings
     const subscription = accelerometer.subscribe(async ({ x, y, z, timestamp }) => {
+      // Check if game has ended
+      const endsAt = storage.getString('endsAt');
+      if (dayjs().isAfter(dayjs(endsAt))) {
+        await BackgroundService.stop();
+      }
+
+      // Check if phone has been picked up
       if (prev) {
         if (Math.abs(x - prev.x) > 5 || Math.abs(y - prev.y) > 5 || Math.abs(z - prev.z) > 1.5) {
           // Disconnect from the game
           socket.close();
 
+          // Cancel scheduled success message
           PushNotification.cancelAllLocalNotifications();
 
           // Send notification
