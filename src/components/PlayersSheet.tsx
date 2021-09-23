@@ -8,15 +8,23 @@ import CloseButton from './CloseButton';
 import Player from './Player';
 import Separator from './Separator';
 
+import { useAppSelector } from '@redux/hooks';
 import colors from '@constants/colors';
-import { useAppSelector } from '../redux/hooks';
 
 const App = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [expanded, setExpanded] = useState<boolean>(false);
   const { players } = useAppSelector((state) => state.game);
 
-  const snapPoints = useMemo(() => ['42%', '100%'], []);
+  const snapPoints = useMemo(() => {
+    // We are showing max 3 players when first snap point is active
+    if (players.length > 3) {
+      return [180 + 3 * 50, '100%'];
+    }
+
+    // If less or equal than 3 players, expand the sheet as needed
+    return [180 + players.length * 50, '100%'];
+  }, [players]);
 
   return (
     <BottomSheet
