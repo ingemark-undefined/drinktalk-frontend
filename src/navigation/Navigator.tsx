@@ -11,7 +11,7 @@ import colors from '@constants/colors';
 
 export type NavigatorParamList = {
   Login: undefined;
-  Home: { name: string };
+  Home: undefined;
   Game: undefined;
   Countdown: undefined;
   Loser: undefined;
