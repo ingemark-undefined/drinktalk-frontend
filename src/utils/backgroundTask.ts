@@ -12,12 +12,7 @@ const veryIntensiveTask = async () => {
   await new Promise(async () => {
     setUpdateIntervalForType(SensorTypes.accelerometer, 100);
 
-    // Listen for when someone loses
-    socket.on('left', (user: string) => {
-      sendLoserNotification({ title: `LUUUZER JE ${user.toUpperCase()}`, message: 'Ne sluša ekipu i plaća ovu rundu.' });
-      storage.setString('loser', user);
-    });
-
+    // Subscribe to accelerometer readings
     const subscription = accelerometer.subscribe(async ({ x, y, z, timestamp }) => {
       if (prev) {
         if (Math.abs(x - prev.x) > 5 || Math.abs(y - prev.y) > 5 || Math.abs(z - prev.z) > 1.5) {
@@ -35,6 +30,19 @@ const veryIntensiveTask = async () => {
         }
       }
       prev = { x, y, z, timestamp };
+    });
+
+    // Listen for when someone loses
+    socket.on('left', async (user: string) => {
+      // Send loser notification
+      sendLoserNotification({ title: `LUUUZER JE ${user.toUpperCase()}`, message: 'Ne sluša ekipu i plaća ovu rundu.' });
+
+      // Show loser screen
+      storage.setString('loser', user);
+
+      // Unsubscribe from the accelerometer and stop the task
+      subscription.unsubscribe();
+      await BackgroundService.stop();
     });
   });
 };
