@@ -12,6 +12,8 @@ module.exports = {
           '@constants': './src/constants',
           '@navigation': './src/navigation',
           '@screens': './src/screens',
+          '@redux': './src/redux',
+          '@utils': './src/utils',
         },
       },
     ],
