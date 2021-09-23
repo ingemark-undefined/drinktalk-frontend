@@ -15,6 +15,7 @@ import socket from '@utils/ws';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { RootState } from '@redux/store';
+import timeFormat from '@utils/timeFormat';
 
 type NewGameScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.NEW_GAME>;
 
@@ -22,7 +23,7 @@ interface NewGameProps {}
 
 const NewGame: React.FunctionComponent<NewGameProps> = () => {
   const navigation = useNavigation<NewGameScreenNavigationProp>();
-  const { gameId } = useSelector((state: RootState) => state.game);
+  const { gameId, time } = useSelector((state: RootState) => state.game);
   const dispatch = useDispatch();
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -53,7 +54,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
 
       <View style={styles.timeContainer}>
         <Text style={styles.timeText}>Vrijeme igre</Text>
-        <Button onPress={() => setIsVisible(true)} title="Odaberi" picker />
+        <Button onPress={() => setIsVisible(true)} title={timeFormat(time) || 'Odaberi'} picker />
       </View>
       <PlayersSheet />
       <BottomButton

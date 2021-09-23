@@ -5,6 +5,9 @@ import Picker from '@gregfrench/react-native-wheel-picker';
 
 import Button from './Button';
 
+import { useAppDispatch } from '@redux/hooks';
+import timeFormat from '@utils/timeFormat';
+import { setTime } from '@redux/gameSlice';
 import colors from '@constants/colors';
 
 interface TimePickerProps {
@@ -13,13 +16,15 @@ interface TimePickerProps {
 }
 
 const TimePicker: React.FunctionComponent<TimePickerProps> = ({ visible, setVisible }) => {
-  const [selectedItem, setSelectedItem] = useState(2);
-  const [items] = useState([
-    { label: '1h 30min', value: 90 },
-    { label: '1h', value: 60 },
-    { label: '30min', value: 30 },
-    { label: '15min', value: 15 },
-  ]);
+  const [selected, setSelected] = useState<number>(90);
+  const dispatch = useAppDispatch();
+
+  const [items] = useState([{ minutes: 90 }, { minutes: 60 }, { minutes: 30 }, { minutes: 15 }]);
+
+  const handleDone = () => {
+    dispatch(setTime(selected));
+    setVisible(false);
+  };
 
   return (
     <ModalContainer
@@ -34,14 +39,16 @@ const TimePicker: React.FunctionComponent<TimePickerProps> = ({ visible, setVisi
           lineColor={colors.black}
           lineGradientColorFrom={colors.black}
           lineGradientColorTo={colors.black}
-          selectedValue={selectedItem}
+          selectedValue={0}
           itemStyle={styles.item}
-          onValueChange={(index) => setSelectedItem(index)}>
-          {items.map((item, i) => (
-            <Picker.Item label={item.label} value={item.value} key={i} />
+          onValueChange={(minutes) => setSelected(minutes)}>
+          {items.map(({ minutes }) => (
+            <Picker.Item label={timeFormat(minutes)} value={minutes} key={minutes} />
           ))}
         </Picker>
-        <Button title="Postavi" onPress={() => setVisible(false)} />
+        <View style={styles.buttonContainer}>
+          <Button title="Postavi" onPress={handleDone} />
+        </View>
       </View>
     </ModalContainer>
   );
@@ -52,18 +59,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,
-    borderRadius: 20,
-    paddingHorizontal: 40,
-    paddingBottom: 40,
+    borderRadius: 24,
+    padding: 30,
   },
   picker: {
-    width: 150,
+    width: '100%',
     height: 180,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   item: {
     color: colors.black,
     fontSize: 26,
+  },
+  buttonContainer: {
+    width: '100%',
   },
 });
 
