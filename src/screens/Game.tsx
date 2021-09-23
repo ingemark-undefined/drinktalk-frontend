@@ -6,11 +6,17 @@ import BackgroundService from 'react-native-background-actions';
 import { Screen, Instructions } from '@components/index';
 
 import { startBackgroundTask } from '@utils/backgroundTask';
+import { useNavigation } from '@react-navigation/core';
+import { useStorage } from '@hooks/useStorage';
 import socket from '@utils/ws';
+import screen from '@navigation/screens';
 
 interface GameProps {}
 
 const Game: React.FunctionComponent<GameProps> = () => {
+  const navigation = useNavigation();
+  const [loser] = useStorage('loser');
+
   useEffect(() => {
     startBackgroundTask();
 
@@ -19,6 +25,12 @@ const Game: React.FunctionComponent<GameProps> = () => {
       PushNotification.cancelAllLocalNotifications();
     });
   }, []);
+
+  useEffect(() => {
+    if (loser) {
+      navigation.replace(screen.LOSER);
+    }
+  }, [loser, navigation]);
 
   return (
     <Screen style={styles.container}>

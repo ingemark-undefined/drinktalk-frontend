@@ -2,8 +2,9 @@ import PushNotification from 'react-native-push-notification';
 import BackgroundService from 'react-native-background-actions';
 import { accelerometer, SensorData, SensorTypes, setUpdateIntervalForType } from 'react-native-sensors';
 
-import socket from '@utils/ws';
 import { sendLoserNotification } from './notifications';
+import { storage } from '@hooks/useStorage';
+import socket from '@utils/ws';
 
 const veryIntensiveTask = async () => {
   let prev: SensorData;
@@ -14,6 +15,7 @@ const veryIntensiveTask = async () => {
     // Listen for when someone loses
     socket.on('left', (user: string) => {
       sendLoserNotification({ title: `LUUUZER JE ${user.toUpperCase()}`, message: 'Ne sluša ekipu i plaća ovu rundu.' });
+      storage.setString('loser', user);
     });
 
     const subscription = accelerometer.subscribe(async ({ x, y, z, timestamp }) => {

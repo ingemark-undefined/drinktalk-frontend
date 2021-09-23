@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { RouteProp, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BottomButton, CircleButton, Screen } from '@components/index';
@@ -15,18 +15,20 @@ import socket from '@utils/ws';
 import { RootState } from '@redux/store';
 import { newGame } from '@redux/gameSlice';
 import BackButton from '@components/BackButton';
+import { storage } from '@hooks/useStorage';
 
-type HomeScreenRouteProp = RouteProp<NavigatorParamList, screen.HOME>;
 type HomeScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.HOME>;
 
-interface HomeProps {
-  route: HomeScreenRouteProp;
-}
+interface HomeProps {}
 
 const Home: React.FunctionComponent<HomeProps> = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const { user } = useSelector((state: RootState) => state.game);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    storage.removeItem('loser');
+  }, []);
 
   const handleNewGame = () => {
     socket.connect();
