@@ -23,7 +23,7 @@ export const gameSlice = createSlice({
     },
     newGame: (state: GameState, action: PayloadAction<string>) => {
       state.gameId = action.payload;
-      state.players.push(state.user);
+      state.players = [state.user];
     },
     setGameId: (state: GameState, action: PayloadAction<string>) => {
       state.gameId = action.payload;
