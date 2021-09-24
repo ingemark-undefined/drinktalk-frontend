@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, Dimensions, Alert, View } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -20,19 +20,22 @@ interface ScanProps {}
 
 const Scan: React.FunctionComponent<ScanProps> = () => {
   const navigation = useNavigation<ScanScreenNavigationProp>();
+  const ref = useRef<QRCodeScanner | null>(null);
 
   const onScan = ({ data }: { data: string }) => {
     socket.connect();
     socket.emit('game:join', data);
 
     socket.on('exception', (exception: string) => {
+      console.log('izvrsavam');
       if (exception === 'GameDoesNotExist') {
-        Alert.alert('Kod koji si skenirao nije ispravan!');
+        Alert.alert('Neispravan kod', 'Kod koji si skenirao nije ispravan!', [{ text: 'OK', onPress: () => ref.current?.reactivate() }]);
       }
     });
 
     socket.on('game', () => {
       navigation.replace(screen.COUNTDOWN);
+      ref.current?.reactivate();
     });
   };
 
@@ -42,7 +45,7 @@ const Scan: React.FunctionComponent<ScanProps> = () => {
       <View style={styles.maskContainer}>
         <CameraMaskSvg />
       </View>
-      <QRCodeScanner onRead={onScan} cameraStyle={styles.camera} reactivate />
+      <QRCodeScanner ref={(node) => (ref.current = node)} onRead={onScan} cameraStyle={styles.camera} />
     </View>
   );
 };
