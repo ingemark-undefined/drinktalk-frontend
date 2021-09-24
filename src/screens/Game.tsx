@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import BackgroundService from 'react-native-background-actions';
@@ -17,6 +17,7 @@ interface GameProps {}
 
 const Game: React.FunctionComponent<GameProps> = () => {
   const navigation = useNavigation();
+  const [remaining, setRemaining] = useState<number>(0);
   const [loser] = useStorage('loser');
 
   useEffect(() => {
@@ -35,7 +36,14 @@ const Game: React.FunctionComponent<GameProps> = () => {
   }, [loser, navigation]);
 
   useInterval(async () => {
+    // Get time when game ends
     const endsAt = storage.getString('endsAt');
+
+    // Calculate remaining time
+    const minutes = Math.ceil(dayjs(storage.getString('endsAt')).diff(dayjs(), 'minutes', true));
+    setRemaining(minutes);
+
+    // Go to success screen if game ended
     if (dayjs().isAfter(dayjs(endsAt))) {
       navigation.replace(screen.SUCCESS);
     }
@@ -43,7 +51,7 @@ const Game: React.FunctionComponent<GameProps> = () => {
 
   return (
     <Screen style={styles.container}>
-      <Instructions />
+      <Instructions remaining={remaining} />
     </Screen>
   );
 };

@@ -5,16 +5,18 @@ import { useAppSelector } from '@redux/hooks';
 import { fontSize } from '@constants/typography';
 import timeFormat from '@utils/timeFormat';
 
-interface InstructionsProps {}
+interface InstructionsProps {
+  remaining?: number;
+}
 
-const Instructions: React.FunctionComponent<InstructionsProps> = () => {
+const Instructions: React.FunctionComponent<InstructionsProps> = ({ remaining }) => {
   const { time } = useAppSelector((state) => state.game);
 
   return (
     <View>
       <Text style={[styles.text, styles.margin]}>
-        Ukoliko podigneš mobitel u sljedećih <Text style={styles.bold}>{timeFormat(time, ' sat', ' min')}</Text> ostalim sudionicima igre
-        doći će notifikacija da si izgubio.
+        Ukoliko podigneš mobitel u sljedećih <Text style={styles.bold}>{timeFormat(remaining || time, ' sat', ' min')}</Text> ostalim
+        sudionicima igre doći će notifikacija da si izgubio.
       </Text>
       <Text style={styles.bold}>Budi fer i plati piće ako izgubiš.</Text>
     </View>
