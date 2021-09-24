@@ -67,7 +67,6 @@ const options = {
     name: 'ic_launcher',
     type: 'mipmap',
   },
-  color: '#ff00ff',
   parameters: {
     delay: 1000,
   },
