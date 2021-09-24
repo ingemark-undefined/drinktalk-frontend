@@ -37,10 +37,10 @@ const PlayersSheet = () => {
         <View style={styles.contentContainer}>
           <MotiView
             from={{
-              transform: [{ translateY: expanded ? 0 : 60 }],
+              transform: [{ translateY: expanded ? 0 : 20 }],
             }}
             animate={{
-              transform: [{ translateY: expanded ? 60 : 0 }],
+              transform: [{ translateY: expanded ? 20 : 0 }],
             }}
             transition={{ type: 'spring', damping: 20 }}>
             <Text style={styles.title}>Prijavljena ekipa</Text>
@@ -55,7 +55,7 @@ const PlayersSheet = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 25,
+    paddingTop: 10,
     marginTop: 20,
     width: '100%',
   },
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     marginRight: 60,
   },
   closeButton: {
-    position: 'absolute',
-    right: 24,
+    alignSelf: 'flex-end',
+    marginRight: 24,
   },
   title: {
     fontFamily: 'BarutaBlack',
