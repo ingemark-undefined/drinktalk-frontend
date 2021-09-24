@@ -8,9 +8,9 @@ import dayjs from 'dayjs';
 import { Screen, Instructions } from '@components/index';
 
 import { scheduleWinNotification } from '@utils/notifications';
+import { fontFamily, fontSize } from '@constants/typography';
 import { setStarted, setTime } from '@redux/gameSlice';
 import { useAppSelector } from '@redux/hooks';
-import { fontSize } from '@constants/typography';
 import { storage } from '@hooks/useStorage';
 import socket from '@utils/ws';
 import screen from '@navigation/screens';
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     marginHorizontal: '20%',
   },
   text: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     fontSize: fontSize.medium,
     marginVertical: 30,
     width: 150,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     bottom: 30,
   },
   countdownText: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     fontSize: 100,
   },
 });

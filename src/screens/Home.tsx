@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 
 import { BottomButton, CircleButton, Screen, BackButton } from '@components/index';
 
+import { fontFamily, fontSize } from '@constants/typography';
 import { newGame, setStarted } from '@redux/gameSlice';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { useAppSelector } from '@redux/hooks';
 import { LogoIcon } from '@assets/icons';
-import { fontSize } from '@constants/typography';
 import { storage } from '@hooks/useStorage';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
@@ -27,13 +27,15 @@ const Home: React.FunctionComponent<HomeProps> = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    socket.off();
-    socket.close();
-    storage.removeItem('loser');
-    storage.removeItem('endsAt');
-    dispatch(setStarted(false));
-  }, [dispatch]);
+  useFocusEffect(
+    useCallback(() => {
+      socket.off();
+      socket.close();
+      storage.removeItem('loser');
+      storage.removeItem('endsAt');
+      dispatch(setStarted(false));
+    }, [dispatch]),
+  );
 
   const handleNewGame = () => {
     setLoading(true);
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     marginBottom: 56,
   },
   text: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     fontSize: fontSize.extraLarge,
     textAlign: 'center',
   },

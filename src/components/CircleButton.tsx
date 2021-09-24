@@ -1,8 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, GestureResponderEvent, ViewStyle, TextStyle, ActivityIndicator } from 'react-native';
 
+import { fontFamily, fontSize } from '@constants/typography';
 import colors from '@constants/colors';
-import { fontSize } from '@constants/typography';
 
 interface CircleButtonProps {
   size?: number;
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     fontSize: fontSize.large,
     textTransform: 'uppercase',
   },

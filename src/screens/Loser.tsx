@@ -4,8 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Screen, BottomButton, Card } from '@components/index';
 
+import { fontFamily, fontSize } from '@constants/typography';
 import { useStorage } from '@hooks/useStorage';
-import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 import socket from '@utils/ws';
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     textAlign: 'center',
   },
   name: {

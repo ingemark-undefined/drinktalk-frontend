@@ -7,6 +7,7 @@ import { MotiView } from 'moti';
 import { SheetHandle, CloseButton, Player, Separator } from './index';
 
 import { useAppSelector } from '@redux/hooks';
+import { fontFamily } from '@constants/typography';
 import colors from '@constants/colors';
 
 const PlayersSheet = () => {
@@ -68,13 +69,13 @@ const styles = StyleSheet.create({
     marginRight: 24,
   },
   title: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     color: colors.primary,
     fontSize: 25,
     marginBottom: 14,
   },
   player: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     fontSize: 20,
   },
   separator: {
