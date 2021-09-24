@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 
 import { Screen, BottomButton, Card } from '@components/index';
@@ -10,6 +10,7 @@ import screen from '@navigation/screens';
 
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
+import socket from '@utils/ws';
 
 type SuccessScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.SUCCESS>;
 
@@ -17,6 +18,10 @@ interface SuccessProps {}
 
 const Success: React.FunctionComponent<SuccessProps> = () => {
   const navigation = useNavigation<SuccessScreenNavigationProp>();
+
+  useEffect(() => {
+    socket.close();
+  }, []);
 
   return (
     <Screen style={styles.container}>

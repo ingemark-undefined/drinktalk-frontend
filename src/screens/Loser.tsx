@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -11,6 +11,7 @@ import screen from '@navigation/screens';
 
 import { NavigatorParamList } from '@navigation/Navigator';
 import { StackNavigationProp } from '@react-navigation/stack';
+import socket from '@utils/ws';
 
 type LoserScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.LOSER>;
 
@@ -19,6 +20,10 @@ interface LoserProps {}
 const Loser: React.FunctionComponent<LoserProps> = () => {
   const navigation = useNavigation<LoserScreenNavigationProp>();
   const [loser] = useStorage('loser');
+
+  useEffect(() => {
+    socket.close();
+  }, []);
 
   return (
     <Screen style={styles.container}>
