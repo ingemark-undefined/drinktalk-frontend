@@ -6,17 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 
 import { Screen, Instructions } from '@components/index';
-import screen from '@navigation/screens';
 
-import { fontSize } from '@constants/typography';
-import colors from '@constants/colors';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { NavigatorParamList } from '@navigation/Navigator';
-import socket from '@utils/ws';
-import { RootState } from '@redux/store';
 import { scheduleWinNotification } from '@utils/notifications';
 import { setStarted, setTime } from '@redux/gameSlice';
+import { RootState } from '@redux/store';
+import { fontSize } from '@constants/typography';
 import { storage } from '@hooks/useStorage';
+import socket from '@utils/ws';
+import screen from '@navigation/screens';
+import colors from '@constants/colors';
+
+import { StackNavigationProp } from '@react-navigation/stack';
+import { NavigatorParamList } from '@navigation/Navigator';
 
 type CountdownScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.COUNTDOWN>;
 
@@ -37,9 +38,11 @@ const Countdown: React.FunctionComponent<CountdownProps> = () => {
   }, [dispatch]);
 
   const handleStart = () => {
-    // Schedule local notification
+    // Schedule local win notification
     scheduleWinNotification(time);
+    // Go to the game screen
     navigation.replace(screen.GAME);
+    // Set the game end time
     storage.setString('endsAt', dayjs().add(time, 'minutes').toISOString());
   };
 
