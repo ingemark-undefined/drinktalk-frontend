@@ -5,12 +5,13 @@ import { useDispatch } from 'react-redux';
 
 import { CircleButton, Icon, TextField } from '@components/index';
 
-import { StackNavigationProp } from '@react-navigation/stack';
-import { NavigatorParamList } from '@navigation/Navigator';
 import { LogoIcon } from '@assets/icons/index';
 import { setUser } from '@redux/gameSlice';
 import socket from '@utils/ws';
 import screen from '@navigation/screens';
+
+import { StackNavigationProp } from '@react-navigation/stack';
+import { NavigatorParamList } from '@navigation/Navigator';
 
 type LoginScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.LOGIN>;
 

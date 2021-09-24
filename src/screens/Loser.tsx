@@ -1,24 +1,24 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
-import { RouteProp, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Screen, BottomButton, Card } from '@components/index';
 
-import { NavigatorParamList } from '@navigation/Navigator';
 import { useStorage } from '@hooks/useStorage';
 import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 
-type LoserScreenRouteProp = RouteProp<NavigatorParamList, screen.LOSER>;
+import { NavigatorParamList } from '@navigation/Navigator';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-interface LoserProps {
-  route: LoserScreenRouteProp;
-}
+type LoserScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.LOSER>;
+
+interface LoserProps {}
 
 const Loser: React.FunctionComponent<LoserProps> = () => {
+  const navigation = useNavigation<LoserScreenNavigationProp>();
   const [loser] = useStorage('loser');
-  const navigation = useNavigation();
 
   return (
     <Screen style={styles.container}>

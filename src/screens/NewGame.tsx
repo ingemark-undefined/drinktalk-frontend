@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Androw from 'react-native-androw';
 import QRCode from 'react-native-qrcode-svg';
 
-import { BottomButton, PlayersSheet, Screen, TimePicker, Button } from '@components/index';
+import { BottomButton, PlayersSheet, Screen, TimePicker, Button, BackButton } from '@components/index';
 
 import { addPlayer, removePlayer } from '@redux/gameSlice';
+import { useAppSelector } from '@redux/hooks';
+import timeFormat from '@utils/timeFormat';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 import socket from '@utils/ws';
+
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigatorParamList } from '@navigation/Navigator';
-import { RootState } from '@redux/store';
-import timeFormat from '@utils/timeFormat';
-import BackButton from '@components/BackButton';
 
 type NewGameScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.NEW_GAME>;
 
@@ -23,7 +23,7 @@ interface NewGameProps {}
 
 const NewGame: React.FunctionComponent<NewGameProps> = () => {
   const navigation = useNavigation<NewGameScreenNavigationProp>();
-  const { gameId, time } = useSelector((state: RootState) => state.game);
+  const { gameId, time } = useAppSelector((state) => state.game);
   const dispatch = useDispatch();
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
   timeContainer: {
     alignItems: 'center',
   },
-
   timeText: {
     fontFamily: 'BarutaBlack',
     fontSize: 18,

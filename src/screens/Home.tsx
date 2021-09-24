@@ -3,19 +3,19 @@ import { Text, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { BottomButton, CircleButton, Screen } from '@components/index';
+import { BottomButton, CircleButton, Screen, BackButton } from '@components/index';
 
-import { LogoIcon } from '@assets/icons';
 import { NavigatorParamList } from '@navigation/Navigator';
+import { RootState } from '@redux/store';
+import { LogoIcon } from '@assets/icons';
 import { fontSize } from '@constants/typography';
+import { newGame } from '@redux/gameSlice';
+import { storage } from '@hooks/useStorage';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
-import { StackNavigationProp } from '@react-navigation/stack';
 import socket from '@utils/ws';
-import { RootState } from '@redux/store';
-import { newGame } from '@redux/gameSlice';
-import BackButton from '@components/BackButton';
-import { storage } from '@hooks/useStorage';
+
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type HomeScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.HOME>;
 

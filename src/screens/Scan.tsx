@@ -3,13 +3,14 @@ import { StyleSheet, Dimensions, Alert, View } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
-import BackButton from '@components/BackButton';
+import { BackButton } from '@components/index';
 
-import { StackNavigationProp } from '@react-navigation/stack';
-import { NavigatorParamList } from '@navigation/Navigator';
 import { CameraMaskSvg } from '@assets/svgs';
 import screen from '@navigation/screens';
 import socket from '@utils/ws';
+
+import { StackNavigationProp } from '@react-navigation/stack';
+import { NavigatorParamList } from '@navigation/Navigator';
 
 const { height } = Dimensions.get('window');
 
