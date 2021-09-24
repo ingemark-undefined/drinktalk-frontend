@@ -6,7 +6,7 @@ Drink&Talk app is made for you and your buddies to help you put front and center
 
 | Name      | Description                                                            |
 | --------- | ---------------------------------------------------------------------- |
-| `master`  | Code of the latest release version.                                    |
+| `main`    | Code of the latest release version                                     |
 | `develop` | Contains code with new (not yet released) changes                      |
 
 ## 💡 Technologies
@@ -28,4 +28,4 @@ yarn android
 
 ## 🚀 Release build
 
-The latest .apk (September 24) can be downloaded from [here](https://install.appcenter.ms/users/jakov.glavina-icloud.com/apps/drink-talk/distribution_groups/public).
+The latest .apk can be downloaded from [here](https://github.com/ingemark-undefined/drinktalk-frontend/releases).
