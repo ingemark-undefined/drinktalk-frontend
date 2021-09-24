@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 import PushNotification from 'react-native-push-notification';
 import BackgroundService from 'react-native-background-actions';
+import dayjs from 'dayjs';
 
 import { Screen, Instructions } from '@components/index';
 
 import { startBackgroundTask } from '@utils/backgroundTask';
-import { useNavigation } from '@react-navigation/core';
 import { storage, useStorage } from '@hooks/useStorage';
-import socket from '@utils/ws';
-import screen from '@navigation/screens';
 import useInterval from '@hooks/useInterval';
-import dayjs from 'dayjs';
+import screen from '@navigation/screens';
+import socket from '@utils/ws';
+
+import { StackNavigationProp } from '@react-navigation/stack';
+import { NavigatorParamList } from '@navigation/Navigator';
+
+type GameScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.GAME>;
 
 interface GameProps {}
 
 const Game: React.FunctionComponent<GameProps> = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<GameScreenNavigationProp>();
   const [remaining, setRemaining] = useState<number>(0);
   const [loser] = useStorage('loser');
 
