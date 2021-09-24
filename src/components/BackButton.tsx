@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 import Icon from './Icon';
 
 import { ChevronLeftIcon } from '@assets/icons';
-import { useNavigation } from '@react-navigation/core';
 import colors from '@constants/colors';
 
 interface BackButtonProps {

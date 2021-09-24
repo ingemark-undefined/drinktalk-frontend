@@ -1,11 +1,11 @@
 import PushNotification from 'react-native-push-notification';
 import BackgroundService from 'react-native-background-actions';
 import { accelerometer, SensorData, SensorTypes, setUpdateIntervalForType } from 'react-native-sensors';
+import dayjs from 'dayjs';
 
 import { sendLoserNotification } from './notifications';
 import { storage } from '@hooks/useStorage';
 import socket from '@utils/ws';
-import dayjs from 'dayjs';
 
 const veryIntensiveTask = async () => {
   let prev: SensorData;
