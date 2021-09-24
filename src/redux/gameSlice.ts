@@ -25,9 +25,6 @@ export const gameSlice = createSlice({
       state.gameId = action.payload;
       state.players = [state.user];
     },
-    setGameId: (state: GameState, action: PayloadAction<string>) => {
-      state.gameId = action.payload;
-    },
     setTime: (state: GameState, action: PayloadAction<number>) => {
       state.time = action.payload;
     },
@@ -37,13 +34,8 @@ export const gameSlice = createSlice({
     removePlayer: (state: GameState, action: PayloadAction<string>) => {
       state.players = state.players.filter((player: string) => player !== action.payload);
     },
-    endGame: (state: GameState) => {
-      state.gameId = initialState.gameId;
-      state.players = initialState.players;
-      state.time = initialState.time;
-    },
   },
 });
 
-export const { setUser, newGame, setGameId, setTime, addPlayer, removePlayer, endGame } = gameSlice.actions;
+export const { setUser, newGame, setTime, addPlayer, removePlayer } = gameSlice.actions;
 export default gameSlice.reducer;
