@@ -31,19 +31,16 @@ const Scan: React.FunctionComponent<ScanProps> = () => {
     socket.emit('game:join', data);
 
     socket.on('exception', (exception: string) => {
-      console.log('EXCEPTION', exception);
+      setError(true);
+      socket.close();
 
       if (exception === 'GameDoesNotExist') {
-        setError(true);
         Alert.alert('Neispravan kod', 'Kod koji si skenirao nije ispravan!', [{ text: 'OK', onPress: () => setError(false) }]);
       }
 
       if (exception === 'UserTaken') {
-        setError(true);
         Alert.alert('Ime zauzeto', 'Ime s kojim si se prijavio/la je već zauzeto!', [{ text: 'OK', onPress: () => setError(false) }]);
       }
-
-      socket.close();
     });
 
     socket.on('game', () => {
