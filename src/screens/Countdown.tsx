@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { useNavigation } from '@react-navigation/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 
 import { Screen, Instructions } from '@components/index';
 
 import { scheduleWinNotification } from '@utils/notifications';
 import { setStarted, setTime } from '@redux/gameSlice';
-import { RootState } from '@redux/store';
+import { useAppSelector } from '@redux/hooks';
 import { fontSize } from '@constants/typography';
 import { storage } from '@hooks/useStorage';
 import socket from '@utils/ws';
@@ -25,7 +25,7 @@ interface CountdownProps {}
 
 const Countdown: React.FunctionComponent<CountdownProps> = () => {
   const dispatch = useDispatch();
-  const { time } = useSelector((state: RootState) => state.game);
+  const { time } = useAppSelector((state) => state.game);
   const navigation = useNavigation<CountdownScreenNavigationProp>();
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 

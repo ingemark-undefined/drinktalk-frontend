@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { BottomButton, CircleButton, Screen, BackButton } from '@components/index';
 
+import { newGame, setStarted } from '@redux/gameSlice';
 import { NavigatorParamList } from '@navigation/Navigator';
-import { RootState } from '@redux/store';
+import { useAppSelector } from '@redux/hooks';
 import { LogoIcon } from '@assets/icons';
 import { fontSize } from '@constants/typography';
-import { newGame, setStarted } from '@redux/gameSlice';
 import { storage } from '@hooks/useStorage';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
@@ -23,7 +23,7 @@ interface HomeProps {}
 
 const Home: React.FunctionComponent<HomeProps> = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const { user } = useSelector((state: RootState) => state.game);
+  const { user } = useAppSelector((state) => state.game);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
