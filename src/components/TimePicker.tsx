@@ -19,7 +19,7 @@ const TimePicker: React.FunctionComponent<TimePickerProps> = ({ visible, setVisi
   const [selected, setSelected] = useState<number>(90);
   const dispatch = useAppDispatch();
 
-  const [items] = useState([{ minutes: 90 }, { minutes: 60 }, { minutes: 30 }, { minutes: 15 }]);
+  const [items] = useState([{ minutes: 90 }, { minutes: 60 }, { minutes: 30 }, { minutes: 15 }, { minutes: 1 }]);
 
   const handleDone = () => {
     dispatch(setTime(selected));
