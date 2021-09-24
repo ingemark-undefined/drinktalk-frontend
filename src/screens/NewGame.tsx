@@ -9,6 +9,7 @@ import { BottomButton, PlayersSheet, Screen, TimePicker, Button, BackButton } fr
 
 import { addPlayer, removePlayer } from '@redux/gameSlice';
 import { useAppSelector } from '@redux/hooks';
+import { fontFamily } from '@constants/typography';
 import timeFormat from '@utils/timeFormat';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
@@ -88,12 +89,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timeText: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     fontSize: 18,
     marginBottom: 10,
   },
   time: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     fontSize: 18,
     marginRight: 28,
   },

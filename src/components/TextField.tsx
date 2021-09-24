@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextInput, StyleSheet, ViewStyle, TextInputProps } from 'react-native';
 
+import { fontFamily } from '@constants/typography';
 import colors from '@constants/colors';
 
 interface TextFieldProps extends TextInputProps {
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 31,
     paddingVertical: 17,
     borderRadius: 30,
-    fontFamily: 'GothamRounded',
+    fontFamily: fontFamily.gothamRounded,
   },
 });
 

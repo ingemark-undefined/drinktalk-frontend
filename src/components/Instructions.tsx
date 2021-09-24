@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { fontFamily, fontSize } from '@constants/typography';
 import { useAppSelector } from '@redux/hooks';
-import { fontSize } from '@constants/typography';
 import timeFormat from '@utils/timeFormat';
 
 interface InstructionsProps {
@@ -40,12 +40,12 @@ const Instructions: React.FunctionComponent<InstructionsProps> = ({ remaining })
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'GothamRounded',
+    fontFamily: fontFamily.gothamRounded,
     fontSize: fontSize.medium,
     textAlign: 'center',
   },
   bold: {
-    fontFamily: 'GothamRoundedBold',
+    fontFamily: fontFamily.gothamRoundedBold,
     textAlign: 'center',
   },
   margin: {

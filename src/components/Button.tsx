@@ -3,8 +3,8 @@ import { TouchableOpacity, TouchableOpacityProps, Text, View, StyleSheet } from 
 
 import Icon from './Icon';
 
+import { fontFamily, fontSize } from '@constants/typography';
 import { ChevronDownIcon } from '@assets/icons';
-import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     color: colors.white,
     fontSize: fontSize.mediumLarge,
   },

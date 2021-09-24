@@ -5,11 +5,11 @@ import { useDispatch } from 'react-redux';
 
 import { BottomButton, CircleButton, Screen, BackButton } from '@components/index';
 
+import { fontFamily, fontSize } from '@constants/typography';
 import { newGame, setStarted } from '@redux/gameSlice';
 import { NavigatorParamList } from '@navigation/Navigator';
 import { useAppSelector } from '@redux/hooks';
 import { LogoIcon } from '@assets/icons';
-import { fontSize } from '@constants/typography';
 import { storage } from '@hooks/useStorage';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     marginBottom: 56,
   },
   text: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     fontSize: fontSize.extraLarge,
     textAlign: 'center',
   },

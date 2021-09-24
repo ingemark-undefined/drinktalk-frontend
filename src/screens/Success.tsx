@@ -3,8 +3,8 @@ import { Text, StyleSheet } from 'react-native';
 
 import { Screen, BottomButton, Card } from '@components/index';
 
+import { fontFamily, fontSize } from '@constants/typography';
 import { useNavigation } from '@react-navigation/core';
-import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
 
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     textAlign: 'center',
   },
   subtitle: {

@@ -4,3 +4,9 @@ export const fontSize = {
   large: 20,
   extraLarge: 26,
 };
+
+export const fontFamily = {
+  barutaBlack: 'BarutaBlack',
+  gothamRounded: 'GothamRounded',
+  gothamRoundedBold: 'GothamRoundedBold',
+};

@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, Text, TouchableOpacityProps, ViewStyle, TextStyle } from 'react-native';
 
+import { fontFamily, fontSize } from '@constants/typography';
 import colors from '@constants/colors';
-import { fontSize } from '@constants/typography';
 
 interface BottomButtonProps extends TouchableOpacityProps {
   title: string;
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: fontSize.medium,
-    fontFamily: 'BarutaBlack',
+    fontFamily: fontFamily.barutaBlack,
     textTransform: 'uppercase',
   },
 });
