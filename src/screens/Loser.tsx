@@ -8,10 +8,10 @@ import { useStorage } from '@hooks/useStorage';
 import { fontSize } from '@constants/typography';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
+import socket from '@utils/ws';
 
 import { NavigatorParamList } from '@navigation/Navigator';
 import { StackNavigationProp } from '@react-navigation/stack';
-import socket from '@utils/ws';
 
 type LoserScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.LOSER>;
 
