@@ -45,7 +45,7 @@ const Scan: React.FunctionComponent<ScanProps> = () => {
       <View style={styles.maskContainer}>
         <CameraMaskSvg />
       </View>
-      <QRCodeScanner ref={(node) => (ref.current = node)} onRead={onScan} cameraStyle={styles.camera} />
+      <QRCodeScanner ref={(node) => (ref.current = node)} onRead={onScan} reactivateTimeout={2000} cameraStyle={styles.camera} />
     </View>
   );
 };
