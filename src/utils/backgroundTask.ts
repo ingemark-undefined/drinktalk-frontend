@@ -18,6 +18,7 @@ const veryIntensiveTask = async () => {
       // Check if game has ended
       const endsAt = storage.getString('endsAt');
       if (dayjs().isAfter(dayjs(endsAt))) {
+        subscription.unsubscribe();
         await BackgroundService.stop();
       }
 
