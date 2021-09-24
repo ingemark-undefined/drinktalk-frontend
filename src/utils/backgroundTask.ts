@@ -47,6 +47,12 @@ const veryIntensiveTask = async () => {
 
     // Listen for when someone loses
     socket.on('left', async (user: string) => {
+      // Check if game is on
+      const endsAt = storage.getString('endsAt');
+      if (dayjs().isAfter(dayjs(endsAt))) {
+        return;
+      }
+
       // Send loser notification
       sendLoserNotification({ title: `LUUUZER JE ${user.toUpperCase()}`, message: 'Ne sluša ekipu i plaća ovu rundu.' });
 
