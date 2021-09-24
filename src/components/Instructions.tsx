@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { useAppSelector } from '@redux/hooks';
@@ -10,12 +10,19 @@ interface InstructionsProps {
 }
 
 const Instructions: React.FunctionComponent<InstructionsProps> = ({ remaining }) => {
-  const { time } = useAppSelector((state) => state.game);
+  const { time, gameId, started } = useAppSelector((state) => state.game);
+
+  const showTime = useMemo(() => {
+    if (!started && !gameId) {
+      return false;
+    }
+    return true;
+  }, [started, gameId]);
 
   return (
     <View>
       <Text style={[styles.text, styles.margin]}>
-        {time ? (
+        {showTime ? (
           <Text>
             Ukoliko podigneš mobitel u sljedećih <Text style={styles.bold}>{timeFormat(remaining || time, ' sat', ' min')}</Text> ostalim
             sudionicima igre doći će notifikacija da si izgubio.

@@ -9,7 +9,7 @@ import { NavigatorParamList } from '@navigation/Navigator';
 import { RootState } from '@redux/store';
 import { LogoIcon } from '@assets/icons';
 import { fontSize } from '@constants/typography';
-import { newGame } from '@redux/gameSlice';
+import { newGame, setStarted } from '@redux/gameSlice';
 import { storage } from '@hooks/useStorage';
 import colors from '@constants/colors';
 import screen from '@navigation/screens';
@@ -32,7 +32,8 @@ const Home: React.FunctionComponent<HomeProps> = () => {
     socket.close();
     storage.removeItem('loser');
     storage.removeItem('endsAt');
-  }, []);
+    dispatch(setStarted(false));
+  }, [dispatch]);
 
   const handleNewGame = () => {
     setLoading(true);

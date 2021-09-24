@@ -15,7 +15,7 @@ import { NavigatorParamList } from '@navigation/Navigator';
 import socket from '@utils/ws';
 import { RootState } from '@redux/store';
 import { scheduleWinNotification } from '@utils/notifications';
-import { setTime } from '@redux/gameSlice';
+import { setStarted, setTime } from '@redux/gameSlice';
 import { storage } from '@hooks/useStorage';
 
 type CountdownScreenNavigationProp = StackNavigationProp<NavigatorParamList, screen.COUNTDOWN>;
@@ -31,6 +31,7 @@ const Countdown: React.FunctionComponent<CountdownProps> = () => {
   useEffect(() => {
     socket.on('started', (t) => {
       dispatch(setTime(t));
+      dispatch(setStarted(true));
       setIsPlaying(true);
     });
   }, [dispatch]);

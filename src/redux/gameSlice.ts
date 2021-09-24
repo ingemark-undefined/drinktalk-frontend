@@ -4,14 +4,16 @@ interface GameState {
   user: string;
   gameId: string | null;
   players: string[];
-  time: number | null;
+  time: number;
+  started: boolean;
 }
 
 const initialState: GameState = {
   user: '',
   gameId: null,
   players: [],
-  time: null,
+  time: 90,
+  started: false,
 };
 
 export const gameSlice = createSlice({
@@ -34,8 +36,14 @@ export const gameSlice = createSlice({
     removePlayer: (state: GameState, action: PayloadAction<string>) => {
       state.players = state.players.filter((player: string) => player !== action.payload);
     },
+    setStarted: (state: GameState, action: PayloadAction<boolean>) => {
+      state.started = action.payload;
+      if (!state.started) {
+        state.gameId = null;
+      }
+    },
   },
 });
 
-export const { setUser, newGame, setTime, addPlayer, removePlayer } = gameSlice.actions;
+export const { setUser, newGame, setTime, addPlayer, removePlayer, setStarted } = gameSlice.actions;
 export default gameSlice.reducer;
