@@ -4,14 +4,14 @@ interface GameState {
   user: string;
   gameId: string | null;
   players: string[];
-  time: number;
+  time: number | null;
 }
 
 const initialState: GameState = {
   user: '',
   gameId: null,
   players: [],
-  time: 90,
+  time: null,
 };
 
 export const gameSlice = createSlice({

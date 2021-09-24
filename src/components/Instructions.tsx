@@ -15,8 +15,16 @@ const Instructions: React.FunctionComponent<InstructionsProps> = ({ remaining })
   return (
     <View>
       <Text style={[styles.text, styles.margin]}>
-        Ukoliko podigneš mobitel u sljedećih <Text style={styles.bold}>{timeFormat(remaining || time, ' sat', ' min')}</Text> ostalim
-        sudionicima igre doći će notifikacija da si izgubio.
+        {time ? (
+          <Text>
+            Ukoliko podigneš mobitel u sljedećih <Text style={styles.bold}>{timeFormat(remaining || time, ' sat', ' min')}</Text> ostalim
+            sudionicima igre doći će notifikacija da si izgubio.
+          </Text>
+        ) : (
+          <Text>
+            Ukoliko podigneš mobitel unutar vremena koje je definirao voditelj, ostalim sudionicima igre doći će notifikacija da si izgubio.
+          </Text>
+        )}
       </Text>
       <Text style={styles.bold}>Budi fer i plati piće ako izgubiš.</Text>
     </View>
