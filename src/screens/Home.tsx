@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 
 import { BottomButton, CircleButton, Screen, BackButton } from '@components/index';
@@ -27,13 +27,15 @@ const Home: React.FunctionComponent<HomeProps> = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    socket.off();
-    socket.close();
-    storage.removeItem('loser');
-    storage.removeItem('endsAt');
-    dispatch(setStarted(false));
-  }, [dispatch]);
+  useFocusEffect(
+    useCallback(() => {
+      socket.off();
+      socket.close();
+      storage.removeItem('loser');
+      storage.removeItem('endsAt');
+      dispatch(setStarted(false));
+    }, [dispatch]),
+  );
 
   const handleNewGame = () => {
     setLoading(true);
