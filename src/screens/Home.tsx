@@ -47,7 +47,7 @@ const Home: React.FunctionComponent<HomeProps> = () => {
 
   return (
     <Screen style={styles.container}>
-      <BackButton />
+      <BackButton onPress={() => navigation.replace(screen.LOGIN)} />
       <LogoIcon style={styles.logoIcon} />
       <View style={styles.textContainer}>
         <Text style={[styles.text, styles.white]}>Hellou</Text>

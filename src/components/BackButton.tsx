@@ -9,13 +9,14 @@ import colors from '@constants/colors';
 
 interface BackButtonProps {
   style?: ViewStyle;
+  onPress?: () => void;
 }
 
-const BackButton: React.FunctionComponent<BackButtonProps> = ({ style }) => {
+const BackButton: React.FunctionComponent<BackButtonProps> = ({ onPress, style }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={navigation.goBack} style={[styles.backButton, style]}>
+    <TouchableOpacity onPress={onPress || navigation.goBack} style={[styles.backButton, style]}>
       <Icon width={20} height={20} icon={ChevronLeftIcon} />
     </TouchableOpacity>
   );
