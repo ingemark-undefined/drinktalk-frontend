@@ -4,10 +4,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { MotiView } from 'moti';
 
-import SheetHandle from './SheetHandle';
-import CloseButton from './CloseButton';
-import Player from './Player';
-import Separator from './Separator';
+import { SheetHandle, CloseButton, Player, Separator } from './index';
 
 import { useAppSelector } from '@redux/hooks';
 import colors from '@constants/colors';

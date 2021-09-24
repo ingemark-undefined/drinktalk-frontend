@@ -1,7 +1,8 @@
-import colors from '@constants/colors';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import DashedLine from 'react-native-dashed-line';
+
+import colors from '@constants/colors';
 
 interface SeparatorProps {}
 

@@ -10,3 +10,6 @@ export { default as CloseButton } from './CloseButton';
 export { default as TimePicker } from './TimePicker';
 export { default as Button } from './Button';
 export { default as BackButton } from './BackButton';
+export { default as SheetHandle } from './SheetHandle';
+export { default as Player } from './Player';
+export { default as Separator } from './Separator';
