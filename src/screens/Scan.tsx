@@ -42,7 +42,7 @@ const Scan: React.FunctionComponent<ScanProps> = () => {
       <View style={styles.maskContainer}>
         <CameraMaskSvg />
       </View>
-      <QRCodeScanner onRead={onScan} cameraStyle={styles.camera} />
+      <QRCodeScanner onRead={onScan} cameraStyle={styles.camera} reactivate />
     </View>
   );
 };
