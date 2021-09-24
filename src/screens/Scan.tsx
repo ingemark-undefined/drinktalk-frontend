@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Dimensions, Alert, View } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -20,22 +20,26 @@ interface ScanProps {}
 
 const Scan: React.FunctionComponent<ScanProps> = () => {
   const navigation = useNavigation<ScanScreenNavigationProp>();
-  const ref = useRef<QRCodeScanner | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   const onScan = ({ data }: { data: string }) => {
+    if (error) {
+      return;
+    }
+
     socket.connect();
     socket.emit('game:join', data);
 
     socket.on('exception', (exception: string) => {
-      console.log('izvrsavam');
       if (exception === 'GameDoesNotExist') {
-        Alert.alert('Neispravan kod', 'Kod koji si skenirao nije ispravan!', [{ text: 'OK', onPress: () => ref.current?.reactivate() }]);
+        setError(true);
+        Alert.alert('Neispravan kod', 'Kod koji si skenirao nije ispravan!', [{ text: 'OK', onPress: () => setError(false) }]);
       }
+      socket.close();
     });
 
     socket.on('game', () => {
       navigation.replace(screen.COUNTDOWN);
-      ref.current?.reactivate();
     });
   };
 
@@ -45,7 +49,7 @@ const Scan: React.FunctionComponent<ScanProps> = () => {
       <View style={styles.maskContainer}>
         <CameraMaskSvg />
       </View>
-      <QRCodeScanner ref={(node) => (ref.current = node)} onRead={onScan} reactivateTimeout={2000} cameraStyle={styles.camera} />
+      <QRCodeScanner onRead={onScan} reactivateTimeout={2000} reactivate={true} cameraStyle={styles.camera} />
     </View>
   );
 };
