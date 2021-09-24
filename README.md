@@ -13,7 +13,14 @@ Drink&Talk app is made for you and your buddies to help you put front and center
 Android app is developed using React Native. One of the reasons we chose this technology is the possibility to have an iOS version of the app with the same codebase. Some of the libraries worth mentioning we are using are React Navigation, Redux, socket.io.
 
 ## 🚧 How to run
-Clone the repo and run the following commands in the root folder:
+Clone the repo and add `.env` file in the root folder with its content being as follows:
+
+```
+WS_ENDPOINT=https://drinktalk.herokuapp.com
+```
+
+Then run the following commands in the root folder:
+
 ```
 yarn
 yarn android
