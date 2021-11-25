@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import RNBootSplash from 'react-native-bootsplash';
 
 import { Login, Home, Game, Countdown, Loser, Success, NewGame, Scan } from '@screens/index';
 
@@ -26,7 +25,7 @@ const Stack = createStackNavigator<NavigatorParamList>();
 
 const Navigator: React.FunctionComponent<NavigatorProps> = () => {
   return (
-    <NavigationContainer onReady={() => RNBootSplash.hide({ fade: true })}>
+    <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false, cardStyle: styles.cardStyle }}>
         <Stack.Screen name={screen.LOGIN} component={Login} />
         <Stack.Screen name={screen.HOME} component={Home} />
