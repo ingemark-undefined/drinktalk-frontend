@@ -35,11 +35,11 @@ const Scan: React.FunctionComponent<ScanProps> = () => {
       socket.close();
 
       if (exception === 'GameDoesNotExist') {
-        Alert.alert('Neispravan kod', 'Kod koji si skenirao nije ispravan!', [{ text: 'OK', onPress: () => setError(false) }]);
+        Alert.alert('Invalid code', 'The code you scanned is invalid!', [{ text: 'OK', onPress: () => setError(false) }]);
       }
 
       if (exception === 'UserTaken') {
-        Alert.alert('Ime zauzeto', 'Ime s kojim si se prijavio/la je već zauzeto!', [{ text: 'OK', onPress: () => setError(false) }]);
+        Alert.alert('Name taken', 'The name with which you signed up is already taken!', [{ text: 'OK', onPress: () => setError(false) }]);
       }
     });
 

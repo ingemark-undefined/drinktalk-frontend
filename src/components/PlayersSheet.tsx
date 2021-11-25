@@ -44,7 +44,7 @@ const PlayersSheet = () => {
               transform: [{ translateY: expanded ? 20 : 0 }],
             }}
             transition={{ type: 'spring', damping: 20 }}>
-            <Text style={styles.title}>Prijavljena ekipa</Text>
+            <Text style={styles.title}>Registered team</Text>
             <FlatList data={players} renderItem={Player} keyExtractor={(item) => item} ItemSeparatorComponent={Separator} />
           </MotiView>
         </View>

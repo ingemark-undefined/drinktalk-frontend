@@ -27,9 +27,9 @@ const Success: React.FunctionComponent<SuccessProps> = () => {
     <Screen style={styles.container}>
       <Card>
         <Text style={[styles.text, styles.title]}>Bravo!</Text>
-        <Text style={[styles.text, styles.subtitle]}>Vi ste prava ekipa koja može zaboraviti tehnologiju na tren.</Text>
+        <Text style={[styles.text, styles.subtitle]}>You are the right team which can forget technology for a moment.</Text>
       </Card>
-      <BottomButton title="Nova igra?" onPress={() => navigation.replace(screen.HOME)} />
+      <BottomButton title="New game?" onPress={() => navigation.replace(screen.HOME)} />
     </Screen>
   );
 };

@@ -24,7 +24,7 @@ const Login: React.FunctionComponent<LoginProps> = () => {
 
   const handleSubmit = () => {
     if (!name) {
-      return Alert.alert('Molimo popuni svoj nadimak/ime!');
+      return Alert.alert('Please fill in your nickname/name!');
     }
 
     dispatch(setUser(name));
@@ -37,9 +37,9 @@ const Login: React.FunctionComponent<LoginProps> = () => {
       <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={-180}>
         <Icon width={169} height={180} icon={LogoIcon} />
         <View style={styles.textField}>
-          <TextField placeholder="Daj nadimak ili ime" value={name} onChangeText={(value) => setName(value)} />
+          <TextField placeholder="Give a nickname or name" value={name} onChangeText={(value) => setName(value)} />
         </View>
-        <CircleButton title="Prijavi se" size={150} onPress={handleSubmit} />
+        <CircleButton title="Sign in" size={150} onPress={handleSubmit} />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );

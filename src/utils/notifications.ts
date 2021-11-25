@@ -46,6 +46,6 @@ export const scheduleWinNotification = (time: number) => {
     ongoing: false,
     invokeApp: true,
     title: 'Bravo!',
-    message: 'Vi ste prava ekipa koja može zaboraviti tehnologiju na tren',
+    message: 'You are the right team which can forget technology for a moment',
   });
 };

@@ -68,8 +68,8 @@ const veryIntensiveTask = async () => {
 
 const options = {
   taskName: 'GameInProgress',
-  taskTitle: 'Igra započeta',
-  taskDesc: 'Ne pomiči mobitel kako bi pobijedio/la',
+  taskTitle: 'Game started',
+  taskDesc: "To win, don't pick up your phone",
   taskIcon: {
     name: 'ic_launcher',
     type: 'mipmap',

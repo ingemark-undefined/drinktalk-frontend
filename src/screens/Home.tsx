@@ -53,19 +53,19 @@ const Home: React.FunctionComponent<HomeProps> = () => {
       <BackButton onPress={() => navigation.replace(screen.LOGIN)} />
       <LogoIcon style={styles.logoIcon} />
       <View style={styles.textContainer}>
-        <Text style={[styles.text, styles.white]}>Hellou</Text>
+        <Text style={[styles.text, styles.white]}>Hello</Text>
         <Text style={styles.text}>{user}</Text>
       </View>
 
       <CircleButton
         size={150}
-        title="Kreiraj igru"
+        title="Create a game"
         onPress={handleNewGame}
         style={styles.createButton}
         loading={loading}
         textStyle={{ fontSize: fontSize.mediumLarge }}
       />
-      <BottomButton title="Prijavi se u postojeću igru" onPress={() => navigation.navigate(screen.SCAN)} />
+      <BottomButton title="Sign up for an existing game" onPress={() => navigation.navigate(screen.SCAN)} />
     </Screen>
   );
 };

@@ -48,7 +48,7 @@ const Countdown: React.FunctionComponent<CountdownProps> = () => {
 
   return (
     <Screen style={styles.container}>
-      <Text style={styles.text}>Spusti i ne diraj mobitel za</Text>
+      <Text style={styles.text}>Put down and don't touch mobile phone for</Text>
       <CountdownCircleTimer
         isPlaying={isPlaying}
         duration={10}
@@ -59,7 +59,7 @@ const Countdown: React.FunctionComponent<CountdownProps> = () => {
         onComplete={handleStart}>
         {({ remainingTime }) => <Animated.Text style={styles.countdownText}>{remainingTime}</Animated.Text>}
       </CountdownCircleTimer>
-      <Text style={styles.text}>sekundi</Text>
+      <Text style={styles.text}>seconds</Text>
       <View style={styles.instructions}>
         <Instructions />
       </View>

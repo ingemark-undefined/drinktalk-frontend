@@ -24,16 +24,16 @@ const Instructions: React.FunctionComponent<InstructionsProps> = ({ remaining })
       <Text style={[styles.text, styles.margin]}>
         {showTime ? (
           <Text>
-            Ukoliko podigneš mobitel u sljedećih <Text style={styles.bold}>{timeFormat(remaining || time, ' sat', ' min')}</Text> ostalim
-            sudionicima igre doći će notifikacija da si izgubio.
+            If you pick up your phone in the next <Text style={styles.bold}>{timeFormat(remaining || time, ' sat', ' min')}</Text>,other
+            participants in the game will be notified that you have lost.
           </Text>
         ) : (
           <Text>
-            Ukoliko podigneš mobitel unutar vremena koje je definirao voditelj, ostalim sudionicima igre doći će notifikacija da si izgubio.
+            If you pick your phone within the time defined by the host, other participants of the game will be notified that you have lost.
           </Text>
         )}
       </Text>
-      <Text style={styles.bold}>Budi fer i plati piće ako izgubiš.</Text>
+      <Text style={styles.bold}>Be fair and pay for a drink if you lose.</Text>
     </View>
   );
 };

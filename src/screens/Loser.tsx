@@ -28,11 +28,11 @@ const Loser: React.FunctionComponent<LoserProps> = () => {
   return (
     <Screen style={styles.container}>
       <Card>
-        <Text style={[styles.text, styles.title]}>Luuuzeer je...</Text>
+        <Text style={[styles.text, styles.title]}>Looooser is...</Text>
         <Text style={[styles.text, styles.name]}>{loser}</Text>
-        <Text style={[styles.text, styles.subtitle]}>Ne sluša ekipu i plaća ovu rundu.</Text>
+        <Text style={[styles.text, styles.subtitle]}>They don't listen to the team and pay this round.</Text>
       </Card>
-      <BottomButton title="Nova igra?" onPress={() => navigation.replace(screen.HOME)} />
+      <BottomButton title="New game?" onPress={() => navigation.replace(screen.HOME)} />
     </Screen>
   );
 };

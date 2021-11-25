@@ -47,7 +47,7 @@ const TimePicker: React.FunctionComponent<TimePickerProps> = ({ visible, setVisi
           ))}
         </Picker>
         <View style={styles.buttonContainer}>
-          <Button title="Postavi" onPress={handleDone} />
+          <Button title="Set" onPress={handleDone} />
         </View>
       </View>
     </ModalContainer>

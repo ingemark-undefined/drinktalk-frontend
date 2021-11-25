@@ -53,7 +53,7 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
       </View>
       <PlayersSheet />
       <BottomButton
-        title="Kreni s igrom"
+        title="Start game"
         onPress={handleStartGame}
         style={{ backgroundColor: colors.black }}
         textStyle={{ color: colors.white }}
