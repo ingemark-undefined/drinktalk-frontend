@@ -19,13 +19,15 @@ export type NavigatorParamList = {
   Scan: undefined;
 };
 
-export interface NavigatorProps {}
+export interface NavigatorProps {
+  onReady: () => void;
+}
 
 const Stack = createStackNavigator<NavigatorParamList>();
 
-const Navigator: React.FunctionComponent<NavigatorProps> = () => {
+const Navigator: React.FunctionComponent<NavigatorProps> = ({ onReady }) => {
   return (
-    <NavigationContainer>
+    <NavigationContainer onReady={onReady}>
       <Stack.Navigator screenOptions={{ headerShown: false, cardStyle: styles.cardStyle }}>
         <Stack.Screen name={screen.LOGIN} component={Login} />
         <Stack.Screen name={screen.HOME} component={Home} />
