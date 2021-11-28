@@ -32,7 +32,7 @@ const veryIntensiveTask = async () => {
           PushNotification.cancelAllLocalNotifications();
 
           // Send notification
-          sendLoserNotification({ title: 'LUUUZER SI TI', message: 'Mobitel se pomaknuo pa plaćaš rundu!' });
+          sendLoserNotification({ title: 'LOOOOSER ARE YOU', message: "You picked your phone up so you're paying for this round!" });
 
           // Show loser screen
           storage.setString('loser', socket.auth.user);
@@ -54,7 +54,7 @@ const veryIntensiveTask = async () => {
       }
 
       // Send loser notification
-      sendLoserNotification({ title: `LUUUZER JE ${user.toUpperCase()}`, message: 'Ne sluša ekipu i plaća ovu rundu.' });
+      sendLoserNotification({ title: `LOOOOSER IS ${user.toUpperCase()}`, message: "They don't listen to the team and pay this round." });
 
       // Show loser screen
       storage.setString('loser', user);

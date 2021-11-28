@@ -48,8 +48,8 @@ const NewGame: React.FunctionComponent<NewGameProps> = () => {
         <View style={styles.qrCodeContainer}>{gameId && <QRCode value={gameId} size={120} />}</View>
       </Androw>
       <View style={styles.timeContainer}>
-        <Text style={styles.timeText}>Vrijeme igre</Text>
-        <Button onPress={() => setIsVisible(true)} title={timeFormat(time) || 'Odaberi'} picker />
+        <Text style={styles.timeText}>Game time</Text>
+        <Button onPress={() => setIsVisible(true)} title={timeFormat(time) || 'Select'} picker />
       </View>
       <PlayersSheet />
       <BottomButton
