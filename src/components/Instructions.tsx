@@ -24,7 +24,7 @@ const Instructions: React.FunctionComponent<InstructionsProps> = ({ remaining })
       <Text style={[styles.text, styles.margin]}>
         {showTime ? (
           <Text>
-            If you pick up your phone in the next <Text style={styles.bold}>{timeFormat(remaining || time, ' sat', ' min')}</Text>, other
+            If you pick up your phone in the next <Text style={styles.bold}>{timeFormat(remaining || time, ' h', ' min')}</Text>, other
             participants in the game will be notified that you have lost.
           </Text>
         ) : (
